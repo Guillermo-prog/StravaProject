@@ -26,6 +26,17 @@ public class LoginController {
 			return false;
 		}
 	}
+	
+	public boolean loginGoogle(String email, String password) {
+		try {
+			this.token = this.serviceLocator.getService().loginGoogle(email, password);			
+			return true;
+		} catch (RemoteException e) {
+			System.out.println("# Error during login: " + e);
+			this.token = -1;
+			return false;
+		}
+	}
 
 	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {

@@ -15,6 +15,9 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 public interface IRemoteFacade extends Remote {
 
 	public long login(String email, String password) throws RemoteException;
+	
+	public long loginGoogle(String email, String password) throws RemoteException;
+
 
 	public void logout(long token) throws RemoteException;
 
@@ -34,6 +37,7 @@ public interface IRemoteFacade extends Remote {
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime ) throws RemoteException;
 
 	public boolean acceptChallenge(long token, String title) throws RemoteException;
+	
 
 
 }

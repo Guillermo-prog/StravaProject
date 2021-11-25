@@ -4,6 +4,7 @@ import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.loginFactory.loginFactory;
 import es.deusto.ingenieria.sd.strava.server.gateway.FacebookServiceGateway;
 import es.deusto.ingenieria.sd.strava.server.gateway.ILogin;
+import es.deusto.ingenieria.sd.strava.server.gateway.LoginGoogleGateway;
 
 public class LoginAppService {
 
@@ -37,6 +38,13 @@ public class LoginAppService {
 		} else {
 			return null;
 		}
+	}
+	
+	public User loginGoogle(String email, String password) {
+		// TODO: Get User using DAO and check
+
+		return LoginGoogleGateway.getInstance().loginGoogle(email, password);
+
 	}
 
 	// registration
