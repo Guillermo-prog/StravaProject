@@ -16,7 +16,8 @@ public class MainProgram {
 		//args[0] = RMIRegistry IP
 		//args[1] = RMIRegistry Port
 		//args[2] = Service Name
-		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
+		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
+		System.out.println("Gorka ");
 		
 		//Bind remote facade instance to a sirvice name using RMIRegistry
 		try {
