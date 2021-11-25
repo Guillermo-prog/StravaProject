@@ -17,7 +17,7 @@ public class MainProgram {
 		
 		LoginController loginController = new LoginController(serviceLocator);
 		LoginDialog loginDialog = new LoginDialog(loginController, serviceLocator);
-		
+		System.out.println("Gorka");
 		//Login
 		loginDialog.LoginD();		
 		//Get Categories

@@ -18,8 +18,11 @@ public class MainProgram {
 		//args[1] = RMIRegistry Port
 		//args[2] = Service Name
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
+
 //		loginFactory factory = new loginFactory();
 //		System.out.println("hejhejhejhej" + factory.getService().sendMessage("en","es","good morning"));
+
+		System.out.println("Gorka ");
 		
 		//Bind remote facade instance to a sirvice name using RMIRegistry
 		try {
