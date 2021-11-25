@@ -3,8 +3,7 @@ package es.deusto.ingenieria.sd.strava.server.services;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.loginFactory.loginFactory;
 import es.deusto.ingenieria.sd.strava.server.gateway.FacebookServiceGateway;
-import es.deusto.ingenieria.sd.strava.server.gateway.ILogin;
-import es.deusto.ingenieria.sd.strava.server.gateway.LoginGoogleGateway;
+import es.deusto.ingenieria.sd.strava.server.gateway.*;
 
 public class LoginAppService {
 
@@ -24,7 +23,7 @@ public class LoginAppService {
 
 	public User login(String email, String password) {
 		// TODO: Get User using DAO and check
-		loginFactory factory = new loginFactory();
+		LoginFactory factory = new LoginFactory();
 		ILogin fbGateway = factory.getTest();
 		User user = new User();
 		user.setEmail("thomas.e2001@gmail.com");
@@ -42,8 +41,10 @@ public class LoginAppService {
 	
 	public User loginGoogle(String email, String password) {
 		// TODO: Get User using DAO and check
-
-		return LoginGoogleGateway.getInstance().loginGoogle(email, password);
+		LoginFactory factory = new LoginFactory();
+		ILogin googleGateway = factory.getTest();
+		User user = new User();
+		return GoogleServiceGateway.getInstance().loginGoogle(email, password);
 
 	}
 
