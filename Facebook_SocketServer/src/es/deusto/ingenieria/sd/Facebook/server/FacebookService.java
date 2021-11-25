@@ -26,47 +26,48 @@ public class FacebookService extends Thread {
 	}
 
 	public void run() {
-//		try {
-//			String data = this.in.readUTF();			
-//			System.out.println("   - TranslationService - Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");					
-//			data = this.translate(data);
-//			this.out.writeUTF(data);					
-//			System.out.println("   - TranslationService - Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data.toUpperCase() + "'");
-//		} catch (EOFException e) {
-//			System.err.println("   # TranslationService - TCPConnection EOF error" + e.getMessage());
-//		} catch (IOException e) {
-//			System.err.println("   # TranslationService - TCPConnection IO error:" + e.getMessage());
-//		} finally {
-//			try {
-//				tcpSocket.close();
-//			} catch (IOException e) {
-//				System.err.println("   # TranslationService - TCPConnection IO error:" + e.getMessage());
-//			}
-//		}
+		try {
+			String data = this.in.readUTF();			
+			System.out.println("   - FacebookService - Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");					
+			boolean user = this.login(data);
+			System.out.println("Vad blir user i FacebookService?" + user);
+			this.out.writeBoolean(user);					
+			System.out.println("   - FacebookService - Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data.toUpperCase() + "'");
+		} catch (EOFException e) {
+			System.err.println("   # FacebookService - TCPConnection EOF error" + e.getMessage());
+		} catch (IOException e) {
+			System.err.println("   # FacebookService - TCPConnection IO error:" + e.getMessage());
+		} finally {
+			try {
+				tcpSocket.close();
+			} catch (IOException e) {
+				System.err.println("   # FacebookService - TCPConnection IO error:" + e.getMessage());
+			}
+		}
 	}
 	
-//	public String translate(String msg) {
-//		String translation = null;
-//		
-//		if (msg != null && !msg.trim().isEmpty()) {
-//			try {
-//				StringTokenizer tokenizer = new StringTokenizer(msg, DELIMITER);		
-//				String langFrom = tokenizer.nextToken();
-//				String langTo = tokenizer.nextToken();
-//				String text = tokenizer.nextToken();
-//				System.out.println("   - Starting translation of " + text + " from: " + langFrom + " to " + langTo);
-//		
-//				if (langFrom != null && langTo != null && text != null && !text.trim().isEmpty()) {
-//					GoogleTranslator gt = new GoogleTranslator();
-//					translation = gt.translate(langFrom, langTo, text);
-//					System.out.println("   - Google Translator result: " + translation);
-//				}
-//			} catch (Exception e) {
-//				System.err.println("   # TranslationService - Translation API error:" + e.getMessage());
-//				translation = null;
-//			}
-//		}
-//		
-//		return (translation == null) ? "ERR" : "OK" + DELIMITER + translation;
-//	}
+	public boolean login(String user) {
+		boolean userExists = false;
+		
+		if (user != null && !user.trim().isEmpty()) {
+			try {
+				StringTokenizer tokenizer = new StringTokenizer(user, DELIMITER);		
+				String userEmail = tokenizer.nextToken();
+				String userPassword = tokenizer.nextToken();
+				//String text = tokenizer.nextToken();
+				//System.out.println("   - Starting translation of " + text + " from: " + langFrom + " to " + langTo);
+		
+				if (userEmail != null && userPassword != null) {
+					FacebookLogin fb = new FacebookLogin();
+					userExists = fb.userExists(userEmail, userPassword);
+					System.out.println("   - Does user exist in Facebook server: " + userExists);
+				}
+			} catch (Exception e) {
+				System.err.println("   # FacebookLogin - Facebook API error:" + e.getMessage());
+				userExists = false;
+			}
+		}
+		
+		return userExists;
+	}
 }

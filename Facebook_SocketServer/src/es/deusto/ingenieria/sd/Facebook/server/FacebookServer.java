@@ -9,7 +9,7 @@ public class FacebookServer {
 	
 	public static void main(String args[]) {
 		if (args.length < 1) {
-			System.err.println(" # Usage: TranslationServer [PORT]");
+			System.err.println(" # Usage: FacebookServer [PORT]");
 			System.exit(1);
 		}
 		
@@ -17,14 +17,14 @@ public class FacebookServer {
 		int serverPort = Integer.parseInt(args[0]);
 		
 		try (ServerSocket tcpServerSocket = new ServerSocket(serverPort);) {
-			System.out.println(" - TranslationServer: Waiting for connections '" + tcpServerSocket.getInetAddress().getHostAddress() + ":" + tcpServerSocket.getLocalPort() + "' ...");
+			System.out.println(" - FacebookServer: Waiting for connections '" + tcpServerSocket.getInetAddress().getHostAddress() + ":" + tcpServerSocket.getLocalPort() + "' ...");
 			
 			while (true) {
 				new FacebookService(tcpServerSocket.accept());
-				System.out.println(" - TranslationServer: New client connection accepted. Client number: " + ++numClients);
+				System.out.println(" - FacebookServer: New client connection accepted. Client number: " + ++numClients);
 			}
 		} catch (IOException e) {
-			System.err.println("# TranslationServer: IO error:" + e.getMessage());
+			System.err.println("# FacebookServer: IO error:" + e.getMessage());
 		}
 	}
 }

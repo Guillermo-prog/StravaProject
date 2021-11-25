@@ -136,7 +136,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			// If user is not logged in
 			if (!this.serverState.values().contains(user)) {
 				Long token = Calendar.getInstance().getTimeInMillis();
-				//this.serverState.put(token, user); -->this means that after registration you login automatically
+				this.serverState.put(token, user);
 				return (token);
 			} else {
 				throw new RemoteException("User is already registered in!");
@@ -146,7 +146,5 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 
 	}
-	
-	
 	
 }
