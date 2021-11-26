@@ -1,7 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
-import es.deusto.ingenieria.sd.strava.server.loginFactory.loginFactory;
+import es.deusto.ingenieria.sd.strava.server.factory.LoginFactory;
 import es.deusto.ingenieria.sd.strava.server.gateway.FacebookServiceGateway;
 import es.deusto.ingenieria.sd.strava.server.gateway.*;
 
@@ -24,7 +24,8 @@ public class LoginAppService {
 	public User login(String email, String password) {
 		// TODO: Get User using DAO and check
 		LoginFactory factory = new LoginFactory();
-		ILogin fbGateway = factory.getTest();
+		boolean fbUserExists = factory.createServiceGateways("Facebook").checkUser(email, password);
+		System.out.println("After checking the FB-server, is it true or false that the user exists? " + fbUserExists);
 		User user = new User();
 		user.setEmail("thomas.e2001@gmail.com");
 		user.setNickname("Thomas");
@@ -39,14 +40,16 @@ public class LoginAppService {
 		}
 	}
 	
-	public User loginGoogle(String email, String password) {
-		// TODO: Get User using DAO and check
-		LoginFactory factory = new LoginFactory();
-		ILogin googleGateway = factory.getTest();
-		User user = new User();
-		return GoogleServiceGateway.getInstance().loginGoogle(email, password);
-
-	}
+	//Kommentera tillbaka detta
+	
+//	public User loginGoogle(String email, String password) {
+//		// TODO: Get User using DAO and check
+//		LoginFactory factory = new LoginFactory();
+//		ILogin googleGateway = factory.getTest();
+//		User user = new User();
+//		return GoogleServiceGateway.getInstance().loginGoogle(email, password);
+//
+//	}
 
 	// registration
 	public User registration(String email, String password, String birthdate, String nickname, int weigth, int heigth,

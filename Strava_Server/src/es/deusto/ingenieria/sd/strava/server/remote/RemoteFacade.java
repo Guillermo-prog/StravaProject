@@ -59,27 +59,29 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 	
-	@Override
-	public synchronized long loginGoogle(String email, String password) throws RemoteException {
-		System.out.println(" * RemoteFacade login: " + email + " / " + password);
-		
-		//Perform login() using LoginAppService
-		User user = LoginAppService.getInstance().loginGoogle(email, password);
-		
-		//If login() success user is stored in the Server State
-		if (user != null) {
-			//If user is not logged in 
-			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();		
-				this.serverState.put(token, user);		
-				return(token);
-			} else {
-				throw new RemoteException("User is already logged in google!");
-			}
-		} else {
-			throw new RemoteException("Login on google fails!");
-		}
-	}
+	//Kommentera tillbaka
+	
+//	@Override
+//	public synchronized long loginGoogle(String email, String password) throws RemoteException {
+//		System.out.println(" * RemoteFacade login: " + email + " / " + password);
+//		
+//		//Perform login() using LoginAppService
+//		User user = LoginAppService.getInstance().loginGoogle(email, password);
+//		
+//		//If login() success user is stored in the Server State
+//		if (user != null) {
+//			//If user is not logged in 
+//			if (!this.serverState.values().contains(user)) {
+//				Long token = Calendar.getInstance().getTimeInMillis();		
+//				this.serverState.put(token, user);		
+//				return(token);
+//			} else {
+//				throw new RemoteException("User is already logged in google!");
+//			}
+//		} else {
+//			throw new RemoteException("Login on google fails!");
+//		}
+//	}
 	
 	@Override
 	public synchronized void logout(long token) throws RemoteException {
