@@ -139,10 +139,12 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public boolean startActivity() throws RemoteException {			
-		return true;
-		
+	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException {			
+		boolean activityCreatedStatus = TrainingAppService.getInstance().createActivity(title, sport, km, date, startTime, duration);
+
+		return activityCreatedStatus;
 	}
+	
 	
 	@Override
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime ) throws RemoteException {	

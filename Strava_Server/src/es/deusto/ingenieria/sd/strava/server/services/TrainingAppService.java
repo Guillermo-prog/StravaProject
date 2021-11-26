@@ -139,18 +139,28 @@ public class TrainingAppService {
 		}		
 	}
 	
-	public boolean startActivity() {
-		//TODO	Create here the activity, taking into account the class diagram
-		return true;
-	}
-	
-	/*//TODO delete we dont need endActivity, revise class diagram
-	 * 
-	 * 
-	 * 	public boolean startActivity(String title, String sport) {
-			//TODO	
-			return true;
+	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) {
+		Activity newActivity = new Activity();
+		newActivity.setTitle(title);
+		newActivity.setSport(sport);
+		newActivity.setStartDate(date);
+		newActivity.setStartTime(startTime);
+		newActivity.setDistanceKm(km);
+		newActivity.setDurationMin(duration);
+		Boolean activityCanBeAdded = false;
+		
+		for (Activity activity : activities) {
+			if (!title.equals(activity.getTitle())) { //this check doesnt work yet
+				this.activities.add(newActivity);
+				System.out.println("Activity has been added.");	
+				activityCanBeAdded = true;
+				break;
+			}
+			else {
+				System.out.println("Activity already exist or the values are null.");
+			}
 		}
-	 * 
-	 */
+		return activityCanBeAdded;	
+
+	}
 }

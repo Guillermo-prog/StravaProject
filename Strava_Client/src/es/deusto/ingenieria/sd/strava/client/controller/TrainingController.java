@@ -33,26 +33,14 @@ public class TrainingController {
 		}
 	}
 	
-	//	public boolean startActivity(String title, String sport) {
-	public boolean startActivity() {
+	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) {
 		try {
-			return this.serviceLocator.getService().startActivity();
+			return this.serviceLocator.getService().createActivity(title, sport, km, date, startTime, duration);
 		} catch (RemoteException e) {
 			return false;
 		}
-		//TODO	Create here the activity, taking into account the class diagram
-		//return true;
 	}
 	
-	/*//TODO delete we dont need endActivity, revise class diagram
-	 * 
-	 * 
-	 * 	public boolean startActivity(String title, String sport) {
-			//TODO	
-			return true;
-		}
-	 * 
-	 */
 
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime) {
 		try {
