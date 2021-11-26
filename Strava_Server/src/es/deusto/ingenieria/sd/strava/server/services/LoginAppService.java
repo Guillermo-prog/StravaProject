@@ -74,7 +74,7 @@ public class LoginAppService {
 			existingUser.setPassword(hashedPassword);
 		}
 
-		//if (existingUser == null && fbUserExists == false) {
+		//if (userExistsOnLocalServer == false && fbUserExists == false) {
 			//RUN THE CODE FOR CHECKING IF THE USER EXISTS IN GOOGLE
 			
 //			public User loginGoogle(String email, String password) {
