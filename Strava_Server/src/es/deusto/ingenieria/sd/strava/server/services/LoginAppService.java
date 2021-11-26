@@ -60,27 +60,20 @@ public class LoginAppService {
 		boolean fbUserExists = false;
 		
 		for (User user : users) {
-			System.out.println("in i for-lopen");
 			String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword());
 			if (user.getEmail().equals(email) && sha1.equals(hashedPassword)) {
-				System.out.println("in i if");
 				existingUser = user;
 				userExistsOnLocalServer = true;
-				System.out.println("Fortsätter for-loopen rulla???");
 			}
-			System.out.println("fortsätter for-loopen?");
 		}
 		
-		System.out.println("Innan nästa if");
 		if (userExistsOnLocalServer == false) {
-			System.out.println("kommer vi in i if-satsen för att kolla fb-inlogg?");
 			LoginFactory factory = new LoginFactory();
 			fbUserExists = factory.createServiceGateways("Facebook").checkUser(email, hashedPassword);
 			existingUser.setEmail(email);
 			existingUser.setPassword(hashedPassword);
 		}
-		System.out.println("efter if");
-		
+
 		//if (existingUser == null && fbUserExists == false) {
 			//RUN THE CODE FOR CHECKING IF THE USER EXISTS IN GOOGLE
 			
