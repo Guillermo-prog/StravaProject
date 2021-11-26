@@ -30,7 +30,6 @@ public class FacebookService extends Thread {
 			String data = this.in.readUTF();			
 			System.out.println("   - FacebookService - Received data from '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data + "'");					
 			boolean user = this.login(data);
-			System.out.println("Vad blir user i FacebookService?" + user);
 			this.out.writeBoolean(user);					
 			System.out.println("   - FacebookService - Sent data to '" + tcpSocket.getInetAddress().getHostAddress() + ":" + tcpSocket.getPort() + "' -> '" + data.toUpperCase() + "'");
 		} catch (EOFException e) {
@@ -60,7 +59,12 @@ public class FacebookService extends Thread {
 				if (userEmail != null && userPassword != null) {
 					FacebookLogin fb = new FacebookLogin();
 					userExists = fb.userExists(userEmail, userPassword);
-					System.out.println("   - Does user exist in Facebook server: " + userExists);
+					if (userExists == true) {
+						System.out.println("User " + userEmail + " exists in the Facebook server");
+					}
+					else {
+						System.out.println("User " + userEmail + " does not exist on Facebook server");
+					}
 				}
 			} catch (Exception e) {
 				System.err.println("   # FacebookLogin - Facebook API error:" + e.getMessage());

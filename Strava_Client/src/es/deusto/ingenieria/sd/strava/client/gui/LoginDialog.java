@@ -18,8 +18,8 @@ public class LoginDialog {
 
 	private LoginController controller;
 	private ServiceLocator serviceLocator;
-	private String email = "thomas.e2001@gmail.com";
-	private String password = "$!9PhNz,";
+	private String email = "vegard.pettersson@gmail.com";
+	private String password = "vegard";
 	private String nickname;
 	private String dbirthdate;
 	private int dweight;
@@ -40,14 +40,12 @@ public class LoginDialog {
 
 		final JTextField emailBox = new JTextField();
 		emailBox.setBounds(120, 50, 150, 20);
-		emailBox.setText("thomas.e2001@gmail.com");
 
 		final JLabel lpass = new JLabel("Password");
 		lpass.setBounds(120, 70, 150, 20);
 
 		final JTextField pass = new JTextField();
 		pass.setBounds(120, 100, 150, 20);
-		pass.setText("$!9PhNz,");
 
 		final JLabel lname = new JLabel("Name");
 		lname.setBounds(120, 120, 150, 20);
@@ -101,6 +99,9 @@ public class LoginDialog {
 				 * JOptionPane.showMessageDialog(null, "Login request sent"); email.setText("");
 				 * pass.setText("");
 				 */
+				email = emailBox.getText();
+				password = pass.getText();
+				
 				JOptionPane.showMessageDialog(null, "Login request sent");
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);

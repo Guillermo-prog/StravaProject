@@ -42,7 +42,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login: " + email + " / " + password);
 		
 		//Perform login() using LoginAppService
+		System.out.println("innan user skapas i remoteFacade");
 		User user = LoginAppService.getInstance().login(email, password);
+		System.out.println("efter user skapas i remoteFacade");
 		
 		//If login() success user is stored in the Server State
 		if (user != null) {
