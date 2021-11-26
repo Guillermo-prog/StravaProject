@@ -52,7 +52,7 @@ public class ChallengeDTO implements java.io.Serializable {
 	}
 	@Override
 	public String toString() {
-		return "ChallengeDTO [title=" + title + ",sport= " + sport + ", targetDistance=" + targetDistance + ", targetTime=" + targetTime
+		return "ChallengeDTO [title = " + title + ", sport = " + sport + ", start = " + start + ", end = " + ", targetDistance = " + targetDistance + ", targetTime = " + targetTime
 				+ "]";
 	}
 	
