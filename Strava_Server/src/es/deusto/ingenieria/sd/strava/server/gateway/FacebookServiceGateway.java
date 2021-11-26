@@ -16,7 +16,7 @@ import es.deusto.ingenieria.sd.strava.server.gateway.ILogin;
 public class FacebookServiceGateway implements ILogin {
 	
 	
-	
+	private static FacebookServiceGateway instance;
 	private String serverIP;
 	private int serverPort;
 	private static String DELIMITER = "#";
@@ -26,13 +26,17 @@ public class FacebookServiceGateway implements ILogin {
 		serverPort = servPort;
 	}
 	
-	 @Override
-	   public void test() {
-	      System.out.println("Kommer till FacebookServiceGateway");
-	      checkUser("federika@gmail.com", "federika");
-	   }
+	public static FacebookServiceGateway getInstance() {
+	if(instance == null) {
+		instance = new FacebookServiceGateway("127.0.0.1", 35600);
+	}
 	
-	public void checkUser(String email, String password){
+	return instance;
+}
+	
+	@Override
+	
+	public boolean checkUser(String email, String password){
 		String message = email+DELIMITER+password;
 		boolean userExists = false;
 		//StringTokenizer tokenizer = null;
@@ -66,7 +70,7 @@ public class FacebookServiceGateway implements ILogin {
 		} catch (IOException e) {
 			System.err.println("# Trans. SocketClient: IO error: " + e.getMessage());
 		}
-		//return translation;
+		return userExists;
 		
 		//return (tokenizer.nextToken().equals("OK")) ? tokenizer.nextToken() : "ERROR"; 	
 	}

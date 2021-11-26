@@ -4,7 +4,7 @@ import java.rmi.Naming;
 
 import es.deusto.ingenieria.sd.strava.server.remote.IRemoteFacade;
 import es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade;
-import es.deusto.ingenieria.sd.strava.server.loginFactory.loginFactory;
+import es.deusto.ingenieria.sd.strava.server.factory.LoginFactory;
 
 public class MainProgram {
 
