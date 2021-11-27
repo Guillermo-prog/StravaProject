@@ -43,11 +43,11 @@ public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoo
 		System.out.println("\t- EURO to USD rate: ");
 	}
 
-	public long loginGoogle(String email, String password) throws RemoteException {
+	public User loginGoogle(String email, String password) throws RemoteException {
 		try {
 			User user = new User();
-			user.setEmail("thomas.e2001@gmail.com");
-			user.setNickname("Thomas");
+			user.setEmail("test@gmail.google.com");
+			user.setNickname("test");
 			// Generate the hash of the password
 			String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
 			user.setPassword(sha1);

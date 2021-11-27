@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.gateway;
 import java.rmi.Naming;
 import es.deusto.ingenieria.sd.strava.google.remote.ILoginGoogle;
+import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 
 public class GoogleServiceGateway {
 
@@ -18,21 +19,17 @@ public class GoogleServiceGateway {
 	}
 	
 	public static GoogleServiceGateway getInstance() {
-		if(instance == null) {
-			instance = new GoogleServiceGateway();
-		}
-		
 		return instance;
 	}
 	
-	public static boolean loginGoogle(String email, String password) {
+	public static User loginGoogle(String email, String password) {
 		System.out.println(" Google Login from Google Service Gateway");
 		
 		try {
 			return this.googleLoginService.loginGoogle(email, password);
 		} catch (Exception ex) {
 			System.out.println("Error getting Google Login from Google Service Gateway: " + ex.getMessage());
-			return -1f;
+			return null;
 		}	
 		
 	}

@@ -42,8 +42,7 @@ public class LoginAppService {
 	public User loginGoogle(String email, String password) {
 		// TODO: Get User using DAO and check
 		LoginFactory factory = new LoginFactory();
-		ILogin googleGateway = factory.getTest();
-		User user = new User();
+		ILogin googleGateway = factory.getTest2();
 		return GoogleServiceGateway.getInstance().loginGoogle(email, password);
 
 	}
