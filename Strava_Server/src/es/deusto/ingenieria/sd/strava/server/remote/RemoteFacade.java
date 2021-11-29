@@ -39,12 +39,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	
 	@Override
 	public synchronized long login(String email, String password) throws RemoteException {
-		System.out.println(" * RemoteFacade login: " + email + " / " + password);
 		
 		//Perform login() using LoginAppService
-		System.out.println("innan user skapas i remoteFacade");
 		User user = LoginAppService.getInstance().login(email, password);
-		System.out.println("efter user skapas i remoteFacade");
 		
 		//If login() success user is stored in the Server State
 		if (user != null) {
@@ -61,16 +58,32 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 	
-	//Kommentera tillbaka
+	@Override
+	public synchronized long loginFacebook(String email, String password) throws RemoteException {
+		
+		//Perform login() using LoginAppService
+		User user = LoginAppService.getInstance().loginFacebook(email, password);
+
+		//If login() success user is stored in the Server State
+		if (user != null) {
+			//If user is not logged in 
+			if (!this.serverState.values().contains(user)) {
+				Long token = Calendar.getInstance().getTimeInMillis();		
+				this.serverState.put(token, user);		
+				return(token);
+			} else {
+				throw new RemoteException("User is already logged in Facebook!");
+			}
+		} else {
+			throw new RemoteException("Login on Facebook fails!");
+		}
+	}
 	
 	@Override
 	public synchronized long loginGoogle(String email, String password) throws RemoteException {
-		System.out.println(" * RemoteFacade login: " + email + " / " + password);
 		
 		//Perform login() using LoginAppService
-		System.out.println(" lanza login appservice");
 		User user = LoginAppService.getInstance().loginGoogle(email, password);
-		System.out.println(" acaba login appservice");
 
 		//If login() success user is stored in the Server State
 		if (user != null) {

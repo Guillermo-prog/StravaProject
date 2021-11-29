@@ -2,11 +2,8 @@ package es.deusto.ingenieria.sd.strava.server.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
-import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ActivityDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 
@@ -16,7 +13,7 @@ public interface IRemoteFacade extends Remote {
 
 	public long login(String email, String password) throws RemoteException;
 	
-	//Kommentera tillbaka
+	public long loginFacebook(String email, String password) throws RemoteException;
 	
 	public long loginGoogle(String email, String password) throws RemoteException;
 

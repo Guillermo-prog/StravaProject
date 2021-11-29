@@ -1,8 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-import java.sql.Time;
-import java.util.Date;
-
 
 public class Activity {
 	private String title;

@@ -1,6 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-import java.util.Date;
 
 public class Challenge {
 	private String title;

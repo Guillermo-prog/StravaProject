@@ -4,7 +4,6 @@ import java.rmi.Naming;
 
 import es.deusto.ingenieria.sd.strava.server.remote.IRemoteFacade;
 import es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade;
-import es.deusto.ingenieria.sd.strava.server.factory.LoginFactory;
 
 public class MainProgram {
 
@@ -18,7 +17,6 @@ public class MainProgram {
 		//args[1] = RMIRegistry Port
 		//args[2] = Service Name
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
-		System.out.println("Gorka ");
 
 //		loginFactory factory = new loginFactory();
 //		System.out.println("hejhejhejhej" + factory.getService().sendMessage("en","es","good morning"));

@@ -1,9 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;

@@ -1,10 +1,6 @@
 package es.deusto.ingenieria.sd.Facebook.server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

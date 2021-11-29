@@ -4,11 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.factory.LoginFactory;
-import es.deusto.ingenieria.sd.strava.server.gateway.FacebookServiceGateway;
-import es.deusto.ingenieria.sd.strava.server.gateway.*;
+
 
 public class LoginAppService {
 
@@ -56,51 +54,44 @@ public class LoginAppService {
 	
 	//Login with if for decission of what auth will be used
 	public User login(String email, String hashedPassword) {
-		System.out.println("in i login");
 		//TODO: Get User using DAO and check
 		User existingUser = new User();
-		System.out.println("Vad är user? " + existingUser);
-		boolean userExistsOnLocalServer = false;
-		boolean fbUserExists = false;
-		
 		for (User user : users) {
 			String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword());
 			if (user.getEmail().equals(email) && sha1.equals(hashedPassword)) {
 				existingUser = user;
-				userExistsOnLocalServer = true;
 			}
-		}
-		
-		if (userExistsOnLocalServer == false) {
-			LoginFactory factory = new LoginFactory();
-			try {
-				fbUserExists = factory.createServiceGateways("Facebook").login(email, hashedPassword);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			existingUser.setEmail(email);
-			existingUser.setPassword(hashedPassword);
-		}
-
-		if (userExistsOnLocalServer == false && fbUserExists == false) {
-			//RUN THE CODE FOR CHECKING IF THE USER EXISTS IN GOOGLE
 			
 		}
-		existingUser = null;
+		
+		return existingUser;
+	}
+	
+	public User loginFacebook(String email, String hashedPassword) {
+		boolean fbUserExists = false;
+		
+		User existingUser = new User();
+		LoginFactory factory = new LoginFactory();
+		try {
+			fbUserExists = factory.createServiceGateways("Facebook").login(email, hashedPassword);
+			if(fbUserExists == true) {
+				existingUser.setEmail(email);
+				existingUser.setPassword(hashedPassword);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return existingUser;
 	}
 	
 	public User loginGoogle(String email, String password) {
-		System.out.println(" entra logingoogle en loginappservice y entra factory");
 		LoginFactory loginfactory = new LoginFactory();
 		
-		boolean checkGoogle;
+		boolean checkGoogle = false;
 		try {
-			System.out.println("check google in ");
-			checkGoogle = loginfactory.createGoogleServiceGateway().login(email, password); //loginGoogle
-			System.out.println("check google out " + checkGoogle);
+			checkGoogle = loginfactory.createServiceGateways("Google").login(email, password); //loginGoogle
 			if(checkGoogle) {//esto que si existe en el servidor de google --> entonces creamos un usuario y lo devolvemos
 				User user = new User();
 				user.setEmail(email);

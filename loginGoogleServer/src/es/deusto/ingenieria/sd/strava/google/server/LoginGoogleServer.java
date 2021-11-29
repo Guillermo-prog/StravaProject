@@ -2,6 +2,7 @@ package es.deusto.ingenieria.sd.strava.google.server;
 
 import java.rmi.Naming;
 
+
 public class LoginGoogleServer {
 
 	public static void main(String[] args) {
