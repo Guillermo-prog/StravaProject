@@ -16,6 +16,8 @@ public interface IRemoteFacade extends Remote {
 
 	public long login(String email, String password) throws RemoteException;
 	
+	//Kommentera tillbaka
+	
 	public long loginGoogle(String email, String password) throws RemoteException;
 
 
@@ -25,10 +27,7 @@ public interface IRemoteFacade extends Remote {
 			int maxrate, int minRate) throws RemoteException;
 
 
-	public boolean startActivity() throws RemoteException;
-
-	// public boolean endActivity(String title, String sport, float km, Date
-	// startDate, Time startTime, float duration ) throws RemoteException;
+	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException;
 
 	public List<ChallengeDTO> getChallenges() throws RemoteException;
 

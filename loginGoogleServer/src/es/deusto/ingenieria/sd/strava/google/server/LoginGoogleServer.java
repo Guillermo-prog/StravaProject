@@ -2,10 +2,6 @@ package es.deusto.ingenieria.sd.strava.google.server;
 
 import java.rmi.Naming;
 
-
-import es.deusto.ingenieria.sd.strava.google.remote.LoginGoogleService;
-import es.deusto.ingenieria.sd.strava.google.remote.ILoginGoogle;
-
 public class LoginGoogleServer {
 
 	public static void main(String[] args) {

@@ -14,11 +14,10 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 
 public interface ILogin {
 	
-	public void checkUser(String email, String password); 
-	public void checkUserGoogle(String email, String password); 
-
-	//public long login(String email, String password) throws RemoteException; //update
-	public void test();
-
-
+//	public boolean checkUser(String email, String password); 
+//	public boolean loginGoogle(String email, String password) throws RemoteException;
+	public boolean login(String email, String password) throws RemoteException;
+	
+	
+	
 }

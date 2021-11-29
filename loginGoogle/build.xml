@@ -18,9 +18,15 @@
 		<mkdir dir="${bin.dir}"/>
 		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
     </target>
+	
+	<target name="2.export" depends="1.build" description="Export classes into a .jar file">
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class"/>
+	</target>
 		
 	<target name="3.server" description="Runs the Server">
-		<java classname="es.deusto.ingenieria.sd.strava.google.server.LoginGoogleServer" classpathref="classpath" fork="true">
+		<java classname="es.deusto.ingenieria.sd.strava.google.remote.LoginGoogleServer" classpathref="classpath" fork="true">
         	<jvmarg value="-Djava.rmi.server.codebase=file:${bin.dir}/"/>
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>
         	<arg value="${rmiregistry.IP}"/> 

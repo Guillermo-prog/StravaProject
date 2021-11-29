@@ -18,8 +18,8 @@ public class LoginDialog {
 
 	private LoginController controller;
 	private ServiceLocator serviceLocator;
-	private String email = "thomas.e2001@gmail.com";
-	private String password = "$!9PhNz,";
+	private String email = "vegard.pettersson@gmail.com";
+	private String password = "vegard";
 	private String nickname;
 	private String dbirthdate;
 	private int dweight;
@@ -40,14 +40,12 @@ public class LoginDialog {
 
 		final JTextField emailBox = new JTextField();
 		emailBox.setBounds(120, 50, 150, 20);
-		emailBox.setText("thomas.e2001@gmail.com");
 
 		final JLabel lpass = new JLabel("Password");
 		lpass.setBounds(120, 70, 150, 20);
 
 		final JTextField pass = new JTextField();
 		pass.setBounds(120, 100, 150, 20);
-		pass.setText("$!9PhNz,");
 
 		final JLabel lname = new JLabel("Name");
 		lname.setBounds(120, 120, 150, 20);
@@ -93,6 +91,47 @@ public class LoginDialog {
 
 		JButton b = new JButton("LOGIN");
 		b.setBounds(100, 250, 95, 30);
+
+		JButton bgoogle = new JButton("Google");
+		bgoogle.setBounds(100, 290, 95, 30);
+
+		JButton bfacebook = new JButton("Facebook");
+		bfacebook.setBounds(170, 290, 95, 30);
+
+		emailBox.setText("test@gmail.google.com");
+
+		pass.setText("$!9PhNz,");
+
+		bgoogle.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				email = emailBox.getText();
+				password = pass.getText();
+
+				JOptionPane.showMessageDialog(null, "Google Login request sent");
+				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
+				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
+				//login google
+				boolean result=controller.loginGoogle(email, sha1);
+				System.out.println("User signed in.");
+				JOptionPane.showMessageDialog(null, "Google login result");
+				long loginToken = controller.getToken();
+				JOptionPane.showMessageDialog(null, "Google Token: " + loginToken);
+				// reset text fields
+				emailBox.setText("");
+				pass.setText("");
+
+				// if (loginToken != -1) {
+				// 	TrainingController trainingController = new TrainingController(serviceLocator);
+				// 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+				// 	trainingWindow.TrainingFrame();
+				// 	f.setVisible(false);
+				// }
+			}
+		});
+
 		b.addActionListener(new ActionListener() {
 
 			@Override
@@ -101,6 +140,9 @@ public class LoginDialog {
 				 * JOptionPane.showMessageDialog(null, "Login request sent"); email.setText("");
 				 * pass.setText("");
 				 */
+				email = emailBox.getText();
+				password = pass.getText();
+
 				JOptionPane.showMessageDialog(null, "Login request sent");
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
@@ -148,7 +190,7 @@ public class LoginDialog {
 				minrate.setVisible(true);
 
 				lbirth.setVisible(true);
-				birthBox.setVisible(true);		
+				birthBox.setVisible(true);
 
 			}
 		});
@@ -182,12 +224,12 @@ public class LoginDialog {
 				lbirth.setVisible(false);
 				birthBox.setVisible(false);
 
-				nickname=name.getText();
-				dbirthdate=birthBox.getText();
-				dweight=Integer.valueOf (weigth.getText());
-				dheight=Integer.valueOf (height.getText());
-				dmaxRate=Integer.valueOf (maxrate.getText());
-				dminRate=Integer.valueOf (minrate.getText());
+				nickname = name.getText();
+				dbirthdate = birthBox.getText();
+				dweight = Integer.valueOf(weigth.getText());
+				dheight = Integer.valueOf(height.getText());
+				dmaxRate = Integer.valueOf(maxrate.getText());
+				dminRate = Integer.valueOf(minrate.getText());
 
 				JOptionPane.showMessageDialog(null, "Register request sent");
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
@@ -198,10 +240,10 @@ public class LoginDialog {
 
 				System.out.println("devuelve register");
 				JOptionPane.showMessageDialog(null, "Register result");
-				
+
 				long loginToken = controller.getToken();
 				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
-				
+
 				System.out.println("token i reg: " + loginToken);
 				if (loginToken != -1) {
 					TrainingController trainingController = new TrainingController(serviceLocator);
@@ -221,8 +263,10 @@ public class LoginDialog {
 
 		f.add(pass);
 		f.add(lpass);
-		
+		//google facebook
 
+		f.add(bgoogle);
+		f.add(bfacebook);
 		// register fields
 		f.add(lname);
 		f.add(name);
@@ -248,7 +292,7 @@ public class LoginDialog {
 		f.add(height);
 		lheight.setVisible(false);
 		height.setVisible(false);
-		
+
 		f.add(lbirth);
 		f.add(birthBox);
 		lbirth.setVisible(false);
@@ -257,10 +301,11 @@ public class LoginDialog {
 		f.setSize(400, 400);
 		f.setLayout(null);
 		f.setVisible(true);
+		
+		
 
 		boolean result = true;
 		return result;
-
 	}
 
 	public void logout() {

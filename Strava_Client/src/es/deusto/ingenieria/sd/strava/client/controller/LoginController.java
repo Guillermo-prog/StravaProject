@@ -27,6 +27,8 @@ public class LoginController {
 		}
 	}
 	
+
+	
 	public boolean loginGoogle(String email, String password) {
 		try {
 			this.token = this.serviceLocator.getService().loginGoogle(email, password);			

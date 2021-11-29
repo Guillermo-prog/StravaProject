@@ -42,7 +42,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login: " + email + " / " + password);
 		
 		//Perform login() using LoginAppService
+		System.out.println("innan user skapas i remoteFacade");
 		User user = LoginAppService.getInstance().login(email, password);
+		System.out.println("efter user skapas i remoteFacade");
 		
 		//If login() success user is stored in the Server State
 		if (user != null) {
@@ -59,13 +61,17 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		}
 	}
 	
+	//Kommentera tillbaka
+	
 	@Override
 	public synchronized long loginGoogle(String email, String password) throws RemoteException {
 		System.out.println(" * RemoteFacade login: " + email + " / " + password);
 		
 		//Perform login() using LoginAppService
+		System.out.println(" lanza login appservice");
 		User user = LoginAppService.getInstance().loginGoogle(email, password);
-		
+		System.out.println(" acaba login appservice");
+
 		//If login() success user is stored in the Server State
 		if (user != null) {
 			//If user is not logged in 
@@ -137,10 +143,12 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public boolean startActivity() throws RemoteException {			
-		return true;
-		
+	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException {			
+		boolean activityCreatedStatus = TrainingAppService.getInstance().createActivity(title, sport, km, date, startTime, duration);
+
+		return activityCreatedStatus;
 	}
+	
 	
 	@Override
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime ) throws RemoteException {	

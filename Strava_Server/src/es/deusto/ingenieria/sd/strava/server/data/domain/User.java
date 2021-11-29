@@ -132,10 +132,7 @@ public class User {
 		result.append(" - ");
 		result.append(this.email);
 		result.append(" - (");
-//		result.append(this.articles.size());
-//		result.append(" articles) - (");
-//		result.append(this.bids.size());
-//		result.append(" bids)");
+
 
 		return result.toString();
 	}
