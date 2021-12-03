@@ -3,7 +3,7 @@ package es.deusto.ingenieria.sd.strava.server.gateway;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 
-import es.deusto.ingenieria.sd.strava.google.remote.ILoginGoogle;
+import es.deusto.ingenieria.sd.strava.google.server.ILoginGoogle;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 
 public class GoogleServiceGateway implements ILogin {
