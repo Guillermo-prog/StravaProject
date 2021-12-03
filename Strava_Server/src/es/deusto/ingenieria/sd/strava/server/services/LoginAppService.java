@@ -70,20 +70,21 @@ public class LoginAppService {
 	public User loginFacebook(String email, String hashedPassword) {
 		boolean fbUserExists = false;
 		
-		User existingUser = new User();
 		LoginFactory factory = new LoginFactory();
 		try {
 			fbUserExists = factory.createServiceGateways("Facebook").login(email, hashedPassword);
 			if(fbUserExists == true) {
+				User existingUser = new User();
 				existingUser.setEmail(email);
 				existingUser.setPassword(hashedPassword);
+				return existingUser;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return existingUser;
+		return null;
 	}
 	
 	public User loginGoogle(String email, String password) {

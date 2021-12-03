@@ -39,17 +39,21 @@ public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoo
 			//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
 			hashGoogle.put("test@gmail.google.com", "$!9PhNz,");
 
-
 			if (hashGoogle.containsKey(email)) {
 				if (hashGoogle.get(email).equals(password)) {
 					loginTrue = true;
 					System.out.println("User " + email + " exists in the Google server");
 				}
+				else {
+					System.out.println("Email and password does not match");
+				}
+			}
+			else {
+				System.out.println("User " + email + " does not exist in the Google server");
 			}
 
 		} catch (Exception ex) {
 			System.out.println("  # Error trying to log on Google " + ex.getMessage());
-			System.out.println("User " + " does not exist in the Google server");
 		}
 		return loginTrue;
 
