@@ -17,13 +17,9 @@ public class MainProgram {
 
 		LoginController loginController = new LoginController(serviceLocator);
 		LoginDialog loginDialog = new LoginDialog(loginController, serviceLocator);
-		System.out.println("Gorka");
 		// Login
 		
-		System.out.println("entra generar ventana");
 		loginDialog.LoginD();
-		System.out.println("sale generar ventana");
-
 
 		// Logout
 		//loginDialog.logout();

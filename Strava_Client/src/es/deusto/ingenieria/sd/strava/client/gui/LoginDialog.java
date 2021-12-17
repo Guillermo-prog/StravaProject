@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
 import es.deusto.ingenieria.sd.strava.client.controller.TrainingController;
 import es.deusto.ingenieria.sd.strava.client.remote.ServiceLocator;
-import es.deusto.ingenieria.sd.strava.client.gui.TrainingWindow;
 
 public class LoginDialog {
 
@@ -96,11 +95,41 @@ public class LoginDialog {
 		bgoogle.setBounds(100, 290, 95, 30);
 
 		JButton bfacebook = new JButton("Facebook");
-		bfacebook.setBounds(170, 290, 95, 30);
+		bfacebook.setBounds(200, 290, 95, 30);
 
 		emailBox.setText("test@gmail.google.com");
 
 		pass.setText("$!9PhNz,");
+		
+		bfacebook.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				email = emailBox.getText();
+				password = pass.getText();
+
+				JOptionPane.showMessageDialog(null, "Facebook Login request sent");
+				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
+				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
+				//login facebook
+				boolean result=controller.loginFacebook(email, sha1);
+				System.out.println("User signed in.");
+				JOptionPane.showMessageDialog(null, "Facebook login result");
+				long loginToken = controller.getToken();
+				JOptionPane.showMessageDialog(null, "Facebook Token: " + loginToken);
+				// reset text fields
+				emailBox.setText("");
+				pass.setText("");
+
+				 if (loginToken != -1) {
+				 	TrainingController trainingController = new TrainingController(serviceLocator);
+				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+				 	trainingWindow.TrainingFrame();
+				 	f.setVisible(false);
+				 }
+			}
+		});
 
 		bgoogle.addActionListener(new ActionListener() {
 
@@ -111,10 +140,10 @@ public class LoginDialog {
 				password = pass.getText();
 
 				JOptionPane.showMessageDialog(null, "Google Login request sent");
-				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
-				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
+				//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
+				//JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
 				//login google
-				boolean result=controller.loginGoogle(email, sha1);
+				boolean result=controller.loginGoogle(email, password);
 				System.out.println("User signed in.");
 				JOptionPane.showMessageDialog(null, "Google login result");
 				long loginToken = controller.getToken();
@@ -123,12 +152,12 @@ public class LoginDialog {
 				emailBox.setText("");
 				pass.setText("");
 
-				// if (loginToken != -1) {
-				// 	TrainingController trainingController = new TrainingController(serviceLocator);
-				// 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
-				// 	trainingWindow.TrainingFrame();
-				// 	f.setVisible(false);
-				// }
+				 if (loginToken != -1) {
+				 	TrainingController trainingController = new TrainingController(serviceLocator);
+				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+				 	trainingWindow.TrainingFrame();
+				 	f.setVisible(false);
+				 }
 			}
 		});
 

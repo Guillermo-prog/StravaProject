@@ -1,16 +1,12 @@
 package es.deusto.ingenieria.sd.strava.client.gui;
 
-import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Float;
 import java.lang.Integer;
-import java.util.Locale;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
@@ -19,11 +15,9 @@ import java.awt.event.ActionListener;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ActivityDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.client.controller.TrainingController;
-import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
 
 public class TrainingWindow {
 	private TrainingController controller;
-	private LoginController loginController;
 	private long loginToken;
 //	private String email = "thomas.e2001@gmail.com";
 //	private String password = "$!9PhNz,";
@@ -78,7 +72,7 @@ public class TrainingWindow {
 	}
 
 	public void acceptChallenge(long token, String challenge) {
-		boolean acceptChallenge = this.controller.acceptChallenge(token, challenge);
+		this.controller.acceptChallenge(token, challenge);
 	}
 
 	public void TrainingFrame() {

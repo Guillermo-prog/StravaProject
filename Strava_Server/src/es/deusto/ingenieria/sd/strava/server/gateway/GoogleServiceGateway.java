@@ -25,32 +25,12 @@ public class GoogleServiceGateway implements ILogin {
 
 	}
 
-//	@Override
-//	public boolean loginGoogle(String email, String password) throws RemoteException{
-//		System.out.println(" Google Login from Google Service Gateway");
-//		
-//		try {
-//			return this.googleLoginService.loginGoogle(email, password);
-//		} catch (Exception ex) {
-//			System.out.println("Error getting Google Login from Google Service Gateway: " + ex.getMessage());
-//			return false;
-//		}	
-//		
-//	}
-
-//	@Override
-//	public boolean checkUser(String email, String password){
-//		return false;
-//	}
 	@Override
 	public boolean login(String email, String password) throws RemoteException {
-		System.out.println(" Google Login from Google Service Gateway");
 
 		try {
-			System.out.println("print login de gateway");
 			boolean temp;
-			temp = googleLoginService.loginGoogle(email, password);
-			System.out.println("GLORIAAA");
+			temp = googleLoginService.login(email, password);
 			return temp;
 		} catch (Exception ex) {
 			System.out.println("Error getting Google Login from Google Service Gateway: " + ex.getMessage());

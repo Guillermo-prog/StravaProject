@@ -27,7 +27,16 @@ public class LoginController {
 		}
 	}
 	
-
+	public boolean loginFacebook(String email, String password) {
+		try {
+			this.token = this.serviceLocator.getService().loginFacebook(email, password);			
+			return true;
+		} catch (RemoteException e) {
+			System.out.println("# Error during login: " + e);
+			this.token = -1;
+			return false;
+		}
+	}
 	
 	public boolean loginGoogle(String email, String password) {
 		try {

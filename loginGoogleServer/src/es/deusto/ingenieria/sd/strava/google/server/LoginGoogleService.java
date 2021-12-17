@@ -3,13 +3,7 @@ package es.deusto.ingenieria.sd.strava.google.server;
 import java.rmi.RemoteException;
 
 import java.rmi.server.UnicastRemoteObject;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoogle {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +19,7 @@ public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoo
 	}
 
 	public static LoginGoogleService getInstance() {
-		System.out.println("ENTRA SERVER EXTERNO");
+
 		if (instance == null) {
 			try {
 				instance = new LoginGoogleService();
@@ -38,21 +32,26 @@ public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoo
 	}
 
 	@Override
-	public boolean loginGoogle(String email, String password) throws RemoteException {
+	public boolean login(String email, String password) throws RemoteException {
+		boolean loginTrue = false;
 		try {
 			LoginGoogleService.getInstance();
+			//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
 			hashGoogle.put("test@gmail.google.com", "$!9PhNz,");
 
+
 			if (hashGoogle.containsKey(email)) {
-				if (hashGoogle.get(email).matches(password)) {
-					return true;
+				if (hashGoogle.get(email).equals(password)) {
+					loginTrue = true;
+					System.out.println("User " + email + " exists in the Google server");
 				}
 			}
 
 		} catch (Exception ex) {
 			System.out.println("  # Error trying to log on Google " + ex.getMessage());
+			System.out.println("User " + " does not exist in the Google server");
 		}
-		return false;
+		return loginTrue;
 
 	}
 

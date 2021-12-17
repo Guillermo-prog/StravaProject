@@ -63,7 +63,7 @@ public class FacebookService extends Thread {
 						System.out.println("User " + userEmail + " exists in the Facebook server");
 					}
 					else {
-						System.out.println("User " + userEmail + " does not exist on Facebook server");
+						System.out.println("User " + userEmail + " does not exist in the Facebook server");
 					}
 				}
 			} catch (Exception e) {

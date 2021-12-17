@@ -20,9 +20,10 @@
     </target>
 	
 	<target name="2.export" depends="1.build" description="Export classes into a .jar file">
-			<delete dir="${dist.dir}"/>
-			<mkdir dir="${dist.dir}"/>
-			<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class"/>
+
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/server/I**.class, **/dto/**.class"/>
 	</target>
 		
 	<target name="3.server" description="Runs the Server">
