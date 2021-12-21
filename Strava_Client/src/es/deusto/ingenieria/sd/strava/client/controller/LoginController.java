@@ -9,16 +9,16 @@ public class LoginController {
 	
 	//Reference to the Service Locator
 	private ServiceLocator serviceLocator;
-	//This attibute stores the token when login success
+	//This attribute stores the token when login success
 	private long token = -1; //-1 = login has not been done or fails
 
 	public LoginController(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
 	}
 	
-	public boolean login(String email, String password) {
+	public boolean login(String email, String password, String type) {
 		try {
-			this.token = this.serviceLocator.getService().login(email, password);			
+			this.token = this.serviceLocator.getService().login(email, password, type);
 			return true;
 		} catch (RemoteException e) {
 			System.out.println("# Error during login: " + e);
@@ -27,6 +27,7 @@ public class LoginController {
 		}
 	}
 	
+	/*
 	public boolean loginFacebook(String email, String password) {
 		try {
 			this.token = this.serviceLocator.getService().loginFacebook(email, password);			
@@ -48,6 +49,7 @@ public class LoginController {
 			return false;
 		}
 	}
+	*/
 
 	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {

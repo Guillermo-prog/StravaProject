@@ -12,10 +12,11 @@ public class LoginFactory {
 	//ILOgin reference
 	
 	public ILogin createServiceGateways(String authType) {
-		if (authType == "Facebook") {
+		if (authType.equals("Facebook")) {
+			System.out.println("in factory");
 			return FacebookServiceGateway.getInstance();
 		}
-		else if (authType =="Google") {
+		else if (authType.equals("Google")) {
 			return GoogleServiceGateway.getInstance();
 		}
 		else {

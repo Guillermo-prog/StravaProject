@@ -8,14 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import es.deusto.ingenieria.sd.strava.server.data.domain.Article;
-//import es.deusto.ingenieria.sd.strava.server.data.domain.Category;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.ArticleAssembler;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.ArticleDTO;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.CategoryAssembler;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.CategoryDTO;
-//import es.deusto.ingenieria.sd.strava.server.services.BidAppService;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
@@ -38,31 +31,54 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public synchronized void login(String email, String password, String type){
+	public synchronized long login(String email, String password, String type) throws RemoteException {
+		long token = -1;
+		User user = LoginAppService.getInstance().login(email, password, type);
+		if (user != null) {
+			//If user is not logged in 
+			if (!this.serverState.values().contains(user)) {
+				token = Calendar.getInstance().getTimeInMillis();		
+				this.serverState.put(token, user);		
+
+			} else {
+				throw new RemoteException("User is already logged in!");
+			}
+		} else {
+			throw new RemoteException("Login fails!");
+		}
+		return token;
+
+	}
+	
+	/*
+	public synchronized long login(String email, String password, String type) throws RemoteException {
+		long token = -1;
 		if(type.equals("normal")) {
 			try {
-				loginNormal(email, password);
+				token = loginNormal(email, password);	
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}else if(type.equals("Facebook")) {
 			try {
-				loginFacebook(email, password);
+				token = loginFacebook(email, password);
+				
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}else if(type.equals("Google")) {
 			try {
-				loginGoogle(email, password);
+				token = loginGoogle(email, password);
+				
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-		
+		return token;
 	}
 	
 	
-	public synchronized long loginNormal(String email, String password)throws RemoteException{
+	public synchronized long loginNormal(String email, String password) throws RemoteException{
 
 		//Perform login() using LoginAppService
 		User user = LoginAppService.getInstance().login(email, password);
@@ -80,9 +96,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		} else {
 			throw new RemoteException("Login fails!");
 		}
-	
 	}
-	public synchronized long loginFacebook(String email, String password)throws RemoteException{
+	
+	public synchronized long loginFacebook(String email, String password) throws RemoteException{
 		
 		//Perform login() using LoginAppService
 		User user = LoginAppService.getInstance().loginFacebook(email, password);
@@ -122,6 +138,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("Login on google fails!");
 		}
 	}
+	*/
 	
 	@Override
 	public synchronized void logout(long token) throws RemoteException {

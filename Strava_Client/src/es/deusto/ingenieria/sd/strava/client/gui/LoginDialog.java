@@ -113,7 +113,7 @@ public class LoginDialog {
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
 				//login facebook
-				boolean result=controller.loginFacebook(email, sha1);
+				boolean result = controller.login(email, sha1, "Facebook");
 				System.out.println("User signed in.");
 				JOptionPane.showMessageDialog(null, "Facebook login result");
 				long loginToken = controller.getToken();
@@ -143,7 +143,7 @@ public class LoginDialog {
 				//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				//JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
 				//login google
-				boolean result=controller.loginGoogle(email, password);
+				boolean result=controller.login(email, password, "Google");
 				System.out.println("User signed in.");
 				JOptionPane.showMessageDialog(null, "Google login result");
 				long loginToken = controller.getToken();
@@ -175,7 +175,7 @@ public class LoginDialog {
 				JOptionPane.showMessageDialog(null, "Login request sent");
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
-				boolean result = controller.login(email, sha1);
+				boolean result = controller.login(email, sha1, "normal");
 				System.out.println("User signed in.");
 				JOptionPane.showMessageDialog(null, "Login result");
 				long loginToken = controller.getToken();
