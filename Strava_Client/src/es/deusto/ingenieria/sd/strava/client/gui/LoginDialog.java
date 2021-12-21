@@ -88,14 +88,14 @@ public class LoginDialog {
 		birthBox.setBounds(120, 260, 70, 20);
 		birthBox.setText("1998-10-22");
 
-		JButton b = new JButton("LOGIN");
-		b.setBounds(100, 250, 95, 30);
+		JButton b = new JButton("Login with email");
+		b.setBounds(100, 210, 195, 30);
 
-		JButton bgoogle = new JButton("Google");
-		bgoogle.setBounds(100, 290, 95, 30);
+		JButton bgoogle = new JButton("Login with Google");
+		bgoogle.setBounds(100, 250, 195, 30);
 
-		JButton bfacebook = new JButton("Facebook");
-		bfacebook.setBounds(200, 290, 95, 30);
+		JButton bfacebook = new JButton("Login with Facebook");
+		bfacebook.setBounds(100, 290, 195, 30);
 
 		emailBox.setText("test@gmail.google.com");
 
@@ -132,17 +132,12 @@ public class LoginDialog {
 		});
 
 		bgoogle.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
 				email = emailBox.getText();
 				password = pass.getText();
 
 				JOptionPane.showMessageDialog(null, "Google Login request sent");
-				//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
-				//JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
-				//login google
 				boolean result=controller.login(email, password, "Google");
 				System.out.println("User signed in.");
 				JOptionPane.showMessageDialog(null, "Google login result");
@@ -193,8 +188,8 @@ public class LoginDialog {
 			}
 		});
 
-		JButton c = new JButton("REGISTER");
-		c.setBounds(200, 250, 95, 30);
+		JButton c = new JButton("Register");
+		c.setBounds(100, 330, 95, 30);
 		c.addActionListener(new ActionListener() {
 
 			@Override
@@ -202,7 +197,9 @@ public class LoginDialog {
 				c.setBounds(200, 300, 95, 30);
 				b.setVisible(false);
 				c.setVisible(false);
-
+				bfacebook.setVisible(false);
+				bgoogle.setVisible(false);
+				
 				lname.setVisible(true);
 				name.setVisible(true);
 
@@ -225,7 +222,7 @@ public class LoginDialog {
 		});
 
 		JButton d = new JButton("SEND");
-		d.setBounds(200, 250, 95, 30);
+		d.setBounds(100, 330, 95, 30);
 		d.addActionListener(new ActionListener() {
 
 			@Override
@@ -253,6 +250,7 @@ public class LoginDialog {
 				lbirth.setVisible(false);
 				birthBox.setVisible(false);
 
+				email = emailBox.getText();
 				nickname = name.getText();
 				dbirthdate = birthBox.getText();
 				dweight = Integer.valueOf(weigth.getText());
@@ -331,17 +329,8 @@ public class LoginDialog {
 		f.setLayout(null);
 		f.setVisible(true);
 		
-		
-
 		boolean result = true;
 		return result;
-	}
-
-	public void logout() {
-		System.out.println(" - Logout from the server...");
-		this.controller.logout();
-		System.out.println("\t* Logout success!");
-
 	}
 
 }

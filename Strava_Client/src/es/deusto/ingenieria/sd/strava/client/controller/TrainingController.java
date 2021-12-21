@@ -60,4 +60,12 @@ public class TrainingController {
 		}
 	}
 
+	public void logout(long token) {
+		try {
+			this.serviceLocator.getService().logout(token);
+		} catch (RemoteException e) {
+			System.out.println("# Error during logout: " + e);
+					
+		}
+	}
 }

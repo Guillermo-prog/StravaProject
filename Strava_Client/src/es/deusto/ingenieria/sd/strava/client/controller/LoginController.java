@@ -27,41 +27,17 @@ public class LoginController {
 		}
 	}
 	
-	/*
-	public boolean loginFacebook(String email, String password) {
-		try {
-			this.token = this.serviceLocator.getService().loginFacebook(email, password);			
-			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
-			return false;
-		}
-	}
-	
-	public boolean loginGoogle(String email, String password) {
-		try {
-			this.token = this.serviceLocator.getService().loginGoogle(email, password);			
-			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
-			return false;
-		}
-	}
-	*/
-
 	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {
 			this.token = this.serviceLocator.getService().registration(email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
+			System.out.println("token i logincontroller" + this.token);
 			return true;
 		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
+			System.out.println("# Error during registration: " + e);
 			this.token = -1;
 			return false;
 		}
 	}
-	
 	
 	public void logout() {
 		try {

@@ -19,8 +19,6 @@ import es.deusto.ingenieria.sd.strava.client.controller.TrainingController;
 public class TrainingWindow {
 	private TrainingController controller;
 	private long loginToken;
-//	private String email = "thomas.e2001@gmail.com";
-//	private String password = "$!9PhNz,";
 	
 	private String Ctitle;
 	private String Csport;
@@ -74,6 +72,13 @@ public class TrainingWindow {
 	public void acceptChallenge(long token, String challenge) {
 		this.controller.acceptChallenge(token, challenge);
 	}
+	
+	public void logout(long token) {
+		System.out.println(" - Logout from the server...");
+		this.controller.logout(token);
+		System.out.println("\t* Logout success!");
+	}
+	
 
 	public void TrainingFrame() {
 		JFrame f = new JFrame("STRAVA TRAINING ");
@@ -148,17 +153,6 @@ public class TrainingWindow {
 		final JTextField targetTimeBox = new JTextField();
 		targetTimeBox.setBounds(120, 200, 150, 20);
 
-//		//Button for going into create challenge mode // IS THIS ONE USED ? SEEMS TO EXIST TWO
-//		JButton createChallengeSend = new JButton("Create Challenge!");
-//		createChallengeSend.setBounds(120, 20, 160, 30);
-//		createChallengeSend.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {				
-//
-//			}
-//		});
-
 		// Button show activities:
 				JButton activities = new JButton("Get Activities");
 				activities.setBounds(120, 50, 160, 30);
@@ -182,9 +176,7 @@ public class TrainingWindow {
 
 						for (JTextField chal : listChal) {
 							chal.setVisible(false);
-
 						}
-
 					}
 				});
 
@@ -195,15 +187,13 @@ public class TrainingWindow {
 				createChallengeButton.setBounds(120, 110, 160, 30);
 
 				JButton acceptChallenge = new JButton("Accept Challenge");
-				acceptChallenge.setBounds(200, 280, 120, 30);
+				acceptChallenge.setBounds(120, 280, 120, 30);
 				acceptChallenge.setVisible(false);
 				
 				challenges.addActionListener(new ActionListener() {
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						List<ChallengeDTO> challengeList = getChallenges();
-						// System.out.println("i trainingframe " + challengeList);
 
 						int i = 0;
 						for (ChallengeDTO chal : getChallenges()) {
@@ -217,18 +207,11 @@ public class TrainingWindow {
 						}
 						// accept
 						acceptChallenge.setVisible(true);
-
 						acceptChallenge.addActionListener(new ActionListener() {
 
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								acceptChallenge.setVisible(false);
-
-								// logic part for ACCEPT
-								// JOptionPane.showMessageDialog(null,"Try accept");
-								// acceptChallenge(loginToken, "Marathon");
-								// JOptionPane.showMessageDialog(null,"Challenge accepted");
-
 								JOptionPane.showMessageDialog(null, "Accept Challenge");
 								acceptChallenge(loginToken, challengeList.get(0).getTitle());
 								JOptionPane.showMessageDialog(null, "Challenge Accepted!");
@@ -254,7 +237,6 @@ public class TrainingWindow {
 				
 		b.setBounds(120, 20, 160, 30);
 		b.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				b.setVisible(false);
@@ -327,14 +309,11 @@ public class TrainingWindow {
 				
 				for (JTextField act : listAct) {
 					act.setVisible(false);
-
 				}
 				for (JTextField chal : listChal) {
 					chal.setVisible(false);
-
 				}
-			}
-				
+			}		
 		});
 	
 		backActivityButton.addActionListener(new ActionListener() {
@@ -462,20 +441,29 @@ public class TrainingWindow {
 					}
 				});
 
-				//
 				for (JTextField act : listAct) {
 					act.setVisible(false);
 
 				}
 				for (JTextField chal : listChal) {
 					chal.setVisible(false);
-
 				}
-
 			}
 		});
 
+		JButton logoutButton = new JButton("Logout");
+		logoutButton.setBounds(290,320,80,30);	
+		logoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				logout(loginToken);
+				f.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Goodbye! Logout successful.");
+			}
+		});
+		
 		f.add(b);
+		f.add(logoutButton);
 		f.setSize(400, 400);
 		f.setLayout(null);
 		f.setVisible(true);

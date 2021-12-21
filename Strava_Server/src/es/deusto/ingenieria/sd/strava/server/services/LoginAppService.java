@@ -55,7 +55,6 @@ public class LoginAppService {
 	public User login(String email, String hashedPassword, String type) throws RemoteException {
 		User existingUser = new User();
 		if (type.equals("normal")) {
-			System.out.println("i normal loginappservice");
 			for (User user : users) {
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword());
 				if (user.getEmail().equals(email) && sha1.equals(hashedPassword)) {
@@ -78,60 +77,7 @@ public class LoginAppService {
 		}	
 		return existingUser;
 	};
-	
-	
-//	//Login with if for decission of what auth will be used
-//	public User login(String email, String hashedPassword) {
-//		//TODO: Get User using DAO and check
-//		User existingUser = new User();
-//		for (User user : users) {
-//			String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword());
-//			if (user.getEmail().equals(email) && sha1.equals(hashedPassword)) {
-//				existingUser = user;
-//			}	
-//		}
-//		return existingUser;
-//	}
-	
-	
-//	public User loginFacebook(String email, String hashedPassword) {
-//		boolean fbUserExists = false;
-//		
-//		LoginFactory factory = new LoginFactory();
-//		try {
-//			fbUserExists = factory.createServiceGateways("Facebook").login(email, hashedPassword);
-//			if(fbUserExists == true) {
-//				User existingUser = new User();
-//				existingUser.setEmail(email);
-//				existingUser.setPassword(hashedPassword);
-//				return existingUser;
-//			}
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return null;
-//	}
-//	
-//	public User loginGoogle(String email, String password) {
-//		LoginFactory loginfactory = new LoginFactory();
-//		
-//		boolean checkGoogle = false;
-//		try {
-//			checkGoogle = loginfactory.createServiceGateways("Google").login(email, password); //loginGoogle
-//			if(checkGoogle) {//esto que si existe en el servidor de google --> entonces creamos un usuario y lo devolvemos
-//				User user = new User();
-//				user.setEmail(email);
-//				user.setPassword(password);
-//				return user;
-//			}
-//		} catch (RemoteException e) {
-//			System.out.println("Can not authenticate user " + e.toString());
-//		}
-//		return null;
-//	}
-	
+
 
 	// registration
 	public User registration(String email, String password, String birthdate, String nickname, int weigth, int heigth,
@@ -141,7 +87,7 @@ public class LoginAppService {
 		user.setEmail(email);
 		user.setNickname(nickname);
 		// Generate the hash of the password
-		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
+		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 		user.setPassword(sha1);
 		// nuevos campos
 		user.setNickname(nickname);
@@ -150,11 +96,8 @@ public class LoginAppService {
 		user.setMaxRate(maxrate);
 		user.setMinRate(minRate);
 		user.setBirthdate(birthdate);
-		System.out.println("el user se ha creado bien");
-		if (user.getEmail().equals(email) && user.checkPassword(password)) {
-			return user;
-		} else {
-			return null;
-		}
+		System.out.println("El user se ha creado bien");
+		this.users.add(user);
+		return user;
 	}
 }
