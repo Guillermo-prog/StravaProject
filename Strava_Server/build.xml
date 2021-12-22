@@ -9,7 +9,7 @@
 	<property name="rmiregistry.IP" value="127.0.0.1"/> 
 	<property name="rmiregistry.port" value="1099"/> 
 	<property name="server.name" value="strava"/>
-
+	
 	<path id="classpath">
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
@@ -33,6 +33,7 @@
 		<java classname="es.deusto.ingenieria.sd.strava.server.test.LocalTest" classpathref="classpath" fork="true">
 		</java>
     </target>
+		
 	
 	<target name="4.server" depends="1.build" description="Runs the Server">
 		<java classname="es.deusto.ingenieria.sd.strava.server.MainProgram" classpathref="classpath" fork="true">

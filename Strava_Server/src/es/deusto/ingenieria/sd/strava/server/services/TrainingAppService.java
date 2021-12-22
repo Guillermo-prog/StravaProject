@@ -7,6 +7,7 @@ import java.util.List;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
+import es.deusto.ingenieria.sd.strava.server.gateway.MailSender;
 
 public class TrainingAppService {
 	private static TrainingAppService instance = new TrainingAppService();
@@ -97,26 +98,28 @@ public class TrainingAppService {
 		Boolean challengeCanBeAdded = false;
 		
 		for (Challenge challenge : challenges) {
-			if (!title.equals(challenge.getTitle())) { //this check doesnt work yet
+			if (!title.equals(challenge.getTitle())) { 
 				this.challenges.add(newChallenge);
 				System.out.println("Challenge has been added.");	
-				challengeCanBeAdded = true;
+				challengeCanBeAdded = true;	
 				break;
 			}
 			else {
 				System.out.println("Challenge already exist or the values are null.");
 			}
 		}
-//		if (challengeCanBeAdded) {
-//			this.challenges.add(newChallenge);
-//		}
 		return challengeCanBeAdded;
 	}
 	
-	public void addCreatedChallenge(Challenge newChallenge) { //I dont think this method will be needed when above if-statement works
+	public void sendChallengeEmail (User user, Challenge challenge) {
+		String email = user.getEmail();
+		String message = "Hello " + email + "! You have just accepted the challenge " + challenge.getTitle() + 
+				", of the type " + challenge.getSport() + ". The challenge starts: " + challenge.getStart() +
+				", and ends at: " + challenge.getEnd() + ". Good luck!" ;
 		
-		
-	}
+		new MailSender(email).sendMessage(message);
+
+	};
 	
 	public boolean acceptChallenge(User user, String title) {	
 		Challenge challengeObject = new Challenge();
@@ -125,11 +128,12 @@ public class TrainingAppService {
 		    	System.out.println("ACCEPTING: " + challenge.getTitle());
 		        if(challenge.getTitle().equals(title)) {
 		        	challengeObject = challenge;
-	        	
 		        }
 		    }
 		if (challengeObject != null) {
 			user.acceptChallenge(challengeObject);
+			System.out.println("USER in trainingap serv" + user + user.getEmail());
+			sendChallengeEmail(user, challengeObject);			
 			return true;
 		}
 		else {
