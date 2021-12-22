@@ -17,36 +17,36 @@ public class LoginController {
 	}
 	
 	public boolean login(String email, String password) {
-		try {
-			this.token = this.serviceLocator.getService().login(email, password);			
+//		try {
+			this.token = this.serviceLocator.getService().login(email, password, "normal");			
 			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
-			return false;
-		}
+//		} catch (RemoteException e) {
+//			System.out.println("# Error during login: " + e);
+//			this.token = -1;
+//			return false;
+//		}
 	}
 	
-	public boolean loginFacebook(String email, String password) {
-		try {
-			this.token = this.serviceLocator.getService().loginFacebook(email, password);			
+	public boolean loginFacebook(String email, String password)  {
+//		try {
+			this.token = this.serviceLocator.getService().login(email, password, "Facebook");			
 			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
-			return false;
-		}
+//		} catch (RemoteException e) {
+//			System.out.println("# Error during login: " + e);
+//			this.token = -1;
+//			return false;
+//		}
 	}
 	
 	public boolean loginGoogle(String email, String password) {
-		try {
-			this.token = this.serviceLocator.getService().loginGoogle(email, password);			
+//		try {
+			this.token = this.serviceLocator.getService().login(email, password, "Google");			
 			return true;
-		} catch (RemoteException e) {
-			System.out.println("# Error during login: " + e);
-			this.token = -1;
-			return false;
-		}
+//		} catch (RemoteException e) {
+//			System.out.println("# Error during login: " + e);
+//			this.token = -1;
+//			return false;
+//		}
 	}
 
 	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {

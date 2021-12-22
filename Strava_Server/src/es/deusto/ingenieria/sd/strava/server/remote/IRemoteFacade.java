@@ -11,7 +11,7 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 //This interface defines the API of the Server. It represents the Remote Facade pattern
 public interface IRemoteFacade extends Remote {
 
-	public void login(String email, String password, String type);
+	public long login(String email, String password, String type);
 	
 	public void logout(long token) throws RemoteException;
 

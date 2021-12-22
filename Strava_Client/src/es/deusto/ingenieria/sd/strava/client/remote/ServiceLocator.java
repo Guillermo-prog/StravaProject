@@ -2,13 +2,14 @@ package es.deusto.ingenieria.sd.strava.client.remote;
 
 import java.rmi.Naming;
 
+
 import es.deusto.ingenieria.sd.strava.server.remote.IRemoteFacade;
 
 //This class implements Service Locator pattern
 public class ServiceLocator {
 	
 	//Remote Facade reference
-	private IRemoteFacade service;
+	private IRemoteFacade service; //pete
 
 	public void setService(String ip, String port, String serviceName) {
 		//Activate Security Manager. It is needed for RMI.
@@ -26,6 +27,6 @@ public class ServiceLocator {
 	}
 	
 	public IRemoteFacade getService() { 
-		return this.service;
+			return this.service;
 	}
 }

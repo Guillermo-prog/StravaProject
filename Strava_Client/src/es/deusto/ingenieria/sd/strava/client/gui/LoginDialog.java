@@ -96,6 +96,9 @@ public class LoginDialog {
 
 		JButton bfacebook = new JButton("Facebook");
 		bfacebook.setBounds(200, 290, 95, 30);
+		
+		JButton blogout= new JButton("Log out");
+		blogout.setBounds(200, 290, 95, 30);
 
 		emailBox.setText("test@gmail.google.com");
 

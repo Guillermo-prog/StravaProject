@@ -38,27 +38,27 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public synchronized void login(String email, String password, String type){
+	public synchronized long login(String email, String password, String type){
 		if(type.equals("normal")) {
 			try {
-				loginNormal(email, password);
+				return loginNormal(email, password);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}else if(type.equals("Facebook")) {
 			try {
-				loginFacebook(email, password);
+				return loginFacebook(email, password);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}else if(type.equals("Google")) {
 			try {
-				loginGoogle(email, password);
+				return loginGoogle(email, password);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-		
+		return -1;
 	}
 	
 	

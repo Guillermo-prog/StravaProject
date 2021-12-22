@@ -21,7 +21,5 @@ public class MainProgram {
 		
 		loginDialog.LoginD();
 
-		// Logout
-		//loginDialog.logout();
 	}
 }

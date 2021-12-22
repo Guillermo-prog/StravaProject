@@ -93,6 +93,7 @@ public class LoginAppService {
 		boolean checkGoogle = false;
 		try {
 			checkGoogle = loginfactory.createServiceGateways("Google").login(email, password); //loginGoogle
+			//return ((new LoginFactory()).createServiceGateways()).login(user,pass); --> linea Rebeca
 			if(checkGoogle) {//esto que si existe en el servidor de google --> entonces creamos un usuario y lo devolvemos
 				User user = new User();
 				user.setEmail(email);
