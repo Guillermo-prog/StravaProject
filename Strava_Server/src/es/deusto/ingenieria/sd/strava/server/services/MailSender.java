@@ -1,4 +1,4 @@
-package es.deusto.ingenieria.sd.strava.server.gateway;
+package es.deusto.ingenieria.sd.strava.server.services;
 
 import java.util.Properties;
 
@@ -15,7 +15,7 @@ public class MailSender {
 	private final String password = "softwaredesign";
 	private final String host = "smtp.gmail.com";
 	private final String port = "587";
-	private final String subject = "New challenge accepted!";
+	private final String subject = "New Strava Challenge Accepted!";
 	private String to;
 	
 	private Properties props;

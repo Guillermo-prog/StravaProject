@@ -7,7 +7,6 @@ import java.util.List;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
-import es.deusto.ingenieria.sd.strava.server.gateway.MailSender;
 
 public class TrainingAppService {
 	private static TrainingAppService instance = new TrainingAppService();
