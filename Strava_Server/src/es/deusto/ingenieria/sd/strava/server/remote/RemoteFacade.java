@@ -8,14 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import es.deusto.ingenieria.sd.strava.server.data.domain.Article;
-//import es.deusto.ingenieria.sd.strava.server.data.domain.Category;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.ArticleAssembler;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.ArticleDTO;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.CategoryAssembler;
-//import es.deusto.ingenieria.sd.strava.server.data.dto.CategoryDTO;
-//import es.deusto.ingenieria.sd.strava.server.services.BidAppService;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
@@ -38,90 +31,25 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public synchronized long login(String email, String password, String type){
-		if(type.equals("normal")) {
-			try {
-				return loginNormal(email, password);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else if(type.equals("Facebook")) {
-			try {
-				return loginFacebook(email, password);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else if(type.equals("Google")) {
-			try {
-				return loginGoogle(email, password);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}
-		return -1;
-	}
-	
-	
-	public synchronized long loginNormal(String email, String password)throws RemoteException{
 
-		//Perform login() using LoginAppService
-		User user = LoginAppService.getInstance().login(email, password);
-		
-		//If login() success user is stored in the Server State
+	public synchronized long login(String email, String password, String type) throws RemoteException {
+		long token = -1;
+		User user = LoginAppService.getInstance().login(email, password, type);
 		if (user != null) {
 			//If user is not logged in 
 			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();		
+				token = Calendar.getInstance().getTimeInMillis();		
 				this.serverState.put(token, user);		
-				return(token);
+
 			} else {
 				throw new RemoteException("User is already logged in!");
 			}
 		} else {
 			throw new RemoteException("Login fails!");
 		}
-	
-	}
-	public synchronized long loginFacebook(String email, String password)throws RemoteException{
-		
-		//Perform login() using LoginAppService
-		User user = LoginAppService.getInstance().loginFacebook(email, password);
-
-		//If login() success user is stored in the Server State
-		if (user != null) {
-			//If user is not logged in 
-			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();		
-				this.serverState.put(token, user);		
-				return(token);
-			} else {
-				throw new RemoteException("User is already logged in Facebook!");
-			}
-		} else {
-			throw new RemoteException("Login on Facebook fails!");
-		}
+		return token;
 	}
 	
-	
-	public synchronized long loginGoogle(String email, String password) throws RemoteException{
-		
-		//Perform login() using LoginAppService
-		User user = LoginAppService.getInstance().loginGoogle(email, password);
-
-		//If login() success user is stored in the Server State
-		if (user != null) {
-			//If user is not logged in 
-			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();		
-				this.serverState.put(token, user);		
-				return(token);
-			} else {
-				throw new RemoteException("User is already logged in google!");
-			}
-		} else {
-			throw new RemoteException("Login on google fails!");
-		}
-	}
 	
 	@Override
 	public synchronized void logout(long token) throws RemoteException {
@@ -198,11 +126,13 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			int minRate) throws RemoteException {
 		User user = LoginAppService.getInstance().registration(email, password,nickname,birthdate,weigth, heigth, maxrate,
 				minRate);
+		System.out.println("user i remote" + user);
 		if (user != null) {
 			// If user is not logged in
 			if (!this.serverState.values().contains(user)) {
 				Long token = Calendar.getInstance().getTimeInMillis();
 				this.serverState.put(token, user);
+				System.out.println("token i remote reg" + token);
 				return (token);
 			} else {
 				throw new RemoteException("User is already registered in!");
