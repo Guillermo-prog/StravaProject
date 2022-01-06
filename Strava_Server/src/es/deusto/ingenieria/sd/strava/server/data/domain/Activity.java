@@ -1,6 +1,12 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-@PersistenceCapable
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+
+@PersistenceCapable(detachable="true")
 public class Activity {
 	@PrimaryKey
 	private String title;
@@ -13,6 +19,7 @@ public class Activity {
 	public Activity() {
 		
 	}
+	
 	
 	public Activity(String title, String sport, float distanceKm, String startTime, String startDate, float durationMin) {
 		

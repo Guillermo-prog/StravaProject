@@ -56,7 +56,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade logout: " + token);
 		
 		if (this.serverState.containsKey(token)) {
-			//Logout means remove the User from Server State
+			
 			this.serverState.remove(token);
 		} else {
 			throw new RemoteException("User is not not logged in!");

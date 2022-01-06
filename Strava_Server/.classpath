@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="C:/SoftLabs/SD/stravaMaster/Strava_Server/lib/commons-codec-1.15.jar"/>
 	<classpathentry kind="con" path="C:/SoftLabs/SD/stravaMaster/Strava_Server/bin"/>
 	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="lib/javax.jdo-3.2.0-m12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,6 +7,7 @@ import java.util.List;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
+import es.deusto.ingenieria.sd.strava.server.data.dao.ActivityDAO;
 
 public class TrainingAppService {
 	private static TrainingAppService instance = new TrainingAppService();
@@ -151,8 +152,13 @@ public class TrainingAppService {
 		Boolean activityCanBeAdded = false;
 		
 		for (Activity activity : activities) {
-			if (!title.equals(activity.getTitle())) { //this check doesnt work yet
-				this.activities.add(newActivity);
+			if (!title.equals(activity.getTitle())) { 
+				//this row below should be deleted ?
+				//this.activities.add(newActivity);
+				
+				//Save the article in the DB using DAO Pattern
+				ActivityDAO.getInstance().save(newActivity);
+				
 				System.out.println("Activity has been added.");	
 				activityCanBeAdded = true;
 				break;
