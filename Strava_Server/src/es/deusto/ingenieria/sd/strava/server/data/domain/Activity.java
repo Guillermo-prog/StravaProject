@@ -1,7 +1,8 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-
+@PersistenceCapable
 public class Activity {
+	@PrimaryKey
 	private String title;
 	private String sport;
 	private float distanceKm;

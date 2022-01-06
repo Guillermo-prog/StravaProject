@@ -1,7 +1,8 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-
+@PersistenceCapable
 public class Challenge {
+	@PrimaryKey
 	private String title;
 	private String sport;
 	private String start;

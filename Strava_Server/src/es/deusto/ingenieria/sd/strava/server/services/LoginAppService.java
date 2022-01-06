@@ -81,7 +81,7 @@ public class LoginAppService {
 
 
 	// registration
-	public User registration(String email, String password, String birthdate, String nickname, int weigth, int heigth,
+	public User registration(String email, String password, String nickname, String birthdate, int weigth, int heigth,
 			int maxrate, int minRate) {
 		// TODO: Get User using DAO and check
 		User user = new User();

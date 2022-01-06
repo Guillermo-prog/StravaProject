@@ -3,17 +3,24 @@ package es.deusto.ingenieria.sd.strava.server.data.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+@PersistenceCapable
 public class User {
+	@PrimaryKey
 	private String nickname;
 	private String password;
 	private String email;
 	private String birthdate;
-	private List<Activity> activities = new ArrayList<>();
-	private List<Challenge> challenges = new ArrayList<>();
 	private int weight;
 	private int height;
 	private int maxRate;
 	private int minRate;
+	
+	@Persistent(mappedBy="user", dependentElement="true")
+	@Join
+	private List<Activity> activities = new ArrayList<>();
+	@Join
+	private List<Challenge> challenges = new ArrayList<>();
+	
 
 	public String getNickname() {
 		return nickname;

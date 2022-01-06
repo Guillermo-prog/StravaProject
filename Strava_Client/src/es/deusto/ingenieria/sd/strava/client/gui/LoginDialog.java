@@ -190,7 +190,7 @@ public class LoginDialog {
 		});
 
 		JButton c = new JButton("Register");
-		c.setBounds(100, 330, 95, 30);
+		c.setBounds(100, 330, 195, 30);
 		c.addActionListener(new ActionListener() {
 
 			@Override
@@ -229,10 +229,12 @@ public class LoginDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c.setBounds(200, 250, 95, 30);
-				b.setVisible(true);
-				c.setVisible(true);
-				d.setVisible(true);
 
+				emailBox.setVisible(false);
+				lemail.setVisible(false);
+				pass.setVisible(false);
+				lpass.setVisible(false);
+				
 				lname.setVisible(false);
 				name.setVisible(false);
 
