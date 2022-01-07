@@ -20,7 +20,7 @@ public class User {
 	private int maxRate;
 	private int minRate;
 	
-	@Persistent(mappedBy="user", dependentElement="true")
+	@Persistent(mappedBy="title", dependentElement="true")
 	@Join
 	private List<Activity> activities = new ArrayList<>();
 	@Join

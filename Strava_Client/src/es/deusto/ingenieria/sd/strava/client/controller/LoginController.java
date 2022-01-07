@@ -16,48 +16,17 @@ public class LoginController {
 		this.serviceLocator = serviceLocator;
 	}
 	
-<<<<<<< HEAD
-	public boolean login(String email, String password) {
-//		try {
-			this.token = this.serviceLocator.getService().login(email, password, "normal");			
-=======
 	public boolean login(String email, String password, String type) {
 		try {
 			this.token = this.serviceLocator.getService().login(email, password, type);
->>>>>>> branch 'master' of https://github.com/Guillermo-prog/StravaProject.git
 			return true;
-//		} catch (RemoteException e) {
-//			System.out.println("# Error during login: " + e);
-//			this.token = -1;
-//			return false;
-//		}
+		} catch (RemoteException e) {
+			System.out.println("# Error during login: " + e);
+			this.token = -1;
+			return false;
+		}
 	}
 	
-<<<<<<< HEAD
-	public boolean loginFacebook(String email, String password)  {
-//		try {
-			this.token = this.serviceLocator.getService().login(email, password, "Facebook");			
-			return true;
-//		} catch (RemoteException e) {
-//			System.out.println("# Error during login: " + e);
-//			this.token = -1;
-//			return false;
-//		}
-	}
-	
-	public boolean loginGoogle(String email, String password) {
-//		try {
-			this.token = this.serviceLocator.getService().login(email, password, "Google");			
-			return true;
-//		} catch (RemoteException e) {
-//			System.out.println("# Error during login: " + e);
-//			this.token = -1;
-//			return false;
-//		}
-	}
-
-=======
->>>>>>> branch 'master' of https://github.com/Guillermo-prog/StravaProject.git
 	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {
 			this.token = this.serviceLocator.getService().registration(email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
