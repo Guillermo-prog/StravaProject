@@ -93,8 +93,16 @@ public class LoginDialog {
 
 		JButton bgoogle = new JButton("Login with Google");
 		bgoogle.setBounds(100, 250, 195, 30);
-
-
+		
+		JButton d = new JButton("EMAIL REGISTRATION");
+		d.setBounds(95, 290, 200, 30);
+		
+		JButton fbRegButton = new JButton("FACEBOOK REGISTRATION");
+		fbRegButton.setBounds(95, 330, 200, 30);
+		
+		JButton googleRegButton = new JButton("GOOGLE REGISTRATION");
+		googleRegButton.setBounds(95, 370, 200, 30);
+		
 		JButton bfacebook = new JButton("Login with Facebook");
 		bfacebook.setBounds(100, 290, 195, 30);
 
@@ -200,7 +208,9 @@ public class LoginDialog {
 				c.setVisible(false);
 				bfacebook.setVisible(false);
 				bgoogle.setVisible(false);
-				
+				d.setVisible(true);
+				fbRegButton.setVisible(true);
+				googleRegButton.setVisible(true);
 				lname.setVisible(true);
 				name.setVisible(true);
 
@@ -222,8 +232,7 @@ public class LoginDialog {
 			}
 		});
 
-		JButton d = new JButton("SEND");
-		d.setBounds(100, 330, 95, 30);
+
 		d.addActionListener(new ActionListener() {
 
 			@Override
@@ -254,6 +263,7 @@ public class LoginDialog {
 				birthBox.setVisible(false);
 
 				email = emailBox.getText();
+				password = pass.getText();
 				nickname = name.getText();
 				dbirthdate = birthBox.getText();
 				dweight = Integer.valueOf(weigth.getText());
@@ -265,7 +275,131 @@ public class LoginDialog {
 				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
 				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
 				System.out.println("lanza register");
-				boolean result = controller.registration(email, sha1, nickname, dbirthdate, dweight, dheight, dmaxRate,
+				boolean result = controller.registration("normal", email, sha1, nickname, dbirthdate, dweight, dheight, dmaxRate,
+						dminRate);
+
+				System.out.println("devuelve register");
+				JOptionPane.showMessageDialog(null, "Register result");
+
+				long loginToken = controller.getToken();
+				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
+
+				System.out.println("token i reg: " + loginToken);
+				if (loginToken != -1) {
+					TrainingController trainingController = new TrainingController(serviceLocator);
+					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+					trainingWindow.TrainingFrame();
+					f.setVisible(false);
+				}
+
+			}
+		});
+		
+		fbRegButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.setBounds(200, 250, 95, 30);
+
+				emailBox.setVisible(false);
+				lemail.setVisible(false);
+				pass.setVisible(false);
+				lpass.setVisible(false);
+				
+				lname.setVisible(false);
+				name.setVisible(false);
+
+				lweigth.setVisible(false);
+				weigth.setVisible(false);
+
+				lheight.setVisible(false);
+				height.setVisible(false);
+
+				lmaxrate.setVisible(false);
+				maxrate.setVisible(false);
+
+				lminrate.setVisible(false);
+				minrate.setVisible(false);
+
+				lbirth.setVisible(false);
+				birthBox.setVisible(false);
+
+				email = emailBox.getText();
+				password = pass.getText();
+				nickname = name.getText();
+				dbirthdate = birthBox.getText();
+				dweight = Integer.valueOf(weigth.getText());
+				dheight = Integer.valueOf(height.getText());
+				dmaxRate = Integer.valueOf(maxrate.getText());
+				dminRate = Integer.valueOf(minrate.getText());
+
+				JOptionPane.showMessageDialog(null, "Facebook register request sent");
+				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
+				JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
+				System.out.println("lanza register");
+				boolean result = controller.registration("Facebook", email, sha1, nickname, dbirthdate, dweight, dheight, dmaxRate,
+						dminRate);
+
+				System.out.println("devuelve register");
+				JOptionPane.showMessageDialog(null, "Register result");
+
+				long loginToken = controller.getToken();
+				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
+
+				System.out.println("token i reg: " + loginToken);
+				if (loginToken != -1) {
+					TrainingController trainingController = new TrainingController(serviceLocator);
+					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+					trainingWindow.TrainingFrame();
+					f.setVisible(false);
+				}
+
+			}
+		});
+		
+		googleRegButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.setBounds(200, 250, 95, 30);
+
+				emailBox.setVisible(false);
+				lemail.setVisible(false);
+				pass.setVisible(false);
+				lpass.setVisible(false);
+				
+				lname.setVisible(false);
+				name.setVisible(false);
+
+				lweigth.setVisible(false);
+				weigth.setVisible(false);
+
+				lheight.setVisible(false);
+				height.setVisible(false);
+
+				lmaxrate.setVisible(false);
+				maxrate.setVisible(false);
+
+				lminrate.setVisible(false);
+				minrate.setVisible(false);
+
+				lbirth.setVisible(false);
+				birthBox.setVisible(false);
+
+				email = emailBox.getText();
+				password = pass.getText();
+				nickname = name.getText();
+				dbirthdate = birthBox.getText();
+				dweight = Integer.valueOf(weigth.getText());
+				dheight = Integer.valueOf(height.getText());
+				dmaxRate = Integer.valueOf(maxrate.getText());
+				dminRate = Integer.valueOf(minrate.getText());
+
+				JOptionPane.showMessageDialog(null, "Google register request sent");
+				//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
+				//JOptionPane.showMessageDialog(null, "\t* Password hash: " + sha1);
+				System.out.println("lanza register");
+				boolean result = controller.registration("Google", email, password, nickname, dbirthdate, dweight, dheight, dmaxRate,
 						dminRate);
 
 				System.out.println("devuelve register");
@@ -288,9 +422,13 @@ public class LoginDialog {
 		f.add(b);
 		f.add(c);
 		f.add(d);
+		d.setVisible(false);
+		f.add(fbRegButton);
+		fbRegButton.setVisible(false);
+		f.add(googleRegButton);
+		googleRegButton.setVisible(false);
 		f.add(emailBox);
 		f.add(lemail);
-
 		f.add(pass);
 		f.add(lpass);
 		//google facebook
@@ -328,7 +466,7 @@ public class LoginDialog {
 		lbirth.setVisible(false);
 		birthBox.setVisible(false);
 
-		f.setSize(400, 400);
+		f.setSize(400, 450);
 		f.setLayout(null);
 		f.setVisible(true);
 		

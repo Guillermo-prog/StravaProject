@@ -68,6 +68,8 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
 	@Override
 	public User find(String param) {		
 		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(5);
+		
 		Transaction tx = pm.currentTransaction();
 
 		User result = null; 
@@ -75,11 +77,14 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
 		try {
 			tx.begin();
 			
+//			Query<?> query = pm.newQuery(User.class.getName());
+//			query.setFilter("email == '" + param + "'");
+			
 			Query<?> query = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE email == '" + param + "'");
 			query.setUnique(true);
 			result = (User) query.execute();
-			
 			tx.commit();
+			System.out.println("User " + result + " exists in DB");
 		} catch (Exception ex) {
 			System.out.println("  $ Error querying a User: " + ex.getMessage());
 		} finally {
@@ -89,7 +94,6 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
 
 			pm.close();
 		}
-
 		return result;
 	}
 }

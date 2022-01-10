@@ -16,6 +16,9 @@ public class Activity {
 	private String startDate;
 	private float durationMin;	
 	
+	@Persistent(defaultFetchGroup="true")
+	private User user;
+	
 	public Activity() {
 		
 	}

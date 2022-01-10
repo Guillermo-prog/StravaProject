@@ -11,19 +11,20 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(detachable="true")
 public class User {
 	@PrimaryKey
-	private String nickname;
-	private String password;
 	private String email;
+	private String password;
+	private String nickname;
 	private String birthdate;
 	private int weight;
 	private int height;
 	private int maxRate;
 	private int minRate;
 	
-	@Persistent(mappedBy="title", dependentElement="true")
 	@Join
+	@Persistent(mappedBy="user", dependentElement="true", defaultFetchGroup="true")
 	private List<Activity> activities = new ArrayList<>();
 	@Join
+	@Persistent(mappedBy="creator", dependentElement="true", defaultFetchGroup="true")
 	private List<Challenge> challenges = new ArrayList<>();
 	
 

@@ -27,9 +27,9 @@ public class LoginController {
 		}
 	}
 	
-	public boolean registration(String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
+	public boolean registration(String type, String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {
-			this.token = this.serviceLocator.getService().registration(email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
+			this.token = this.serviceLocator.getService().registration(type, email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
 			System.out.println("token i logincontroller" + this.token);
 			return true;
 		} catch (RemoteException e) {
