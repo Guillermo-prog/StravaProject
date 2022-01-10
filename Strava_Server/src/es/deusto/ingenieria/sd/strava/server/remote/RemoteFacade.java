@@ -122,9 +122,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public long registration(String email, String password, String nickname,String birthdate, int weigth, int heigth, int maxrate,
+	public long registration(String type, String email, String password, String nickname,String birthdate, int weigth, int heigth, int maxrate,
 			int minRate) throws RemoteException {
-		User user = LoginAppService.getInstance().registration(email, password,nickname,birthdate,weigth, heigth, maxrate,
+		User user = LoginAppService.getInstance().registration(type, email, password,nickname,birthdate,weigth, heigth, maxrate,
 				minRate);
 		System.out.println("user i remote" + user);
 		if (user != null) {

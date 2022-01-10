@@ -13,7 +13,6 @@ public class LoginFactory {
 	
 	public ILogin createServiceGateways(String authType) {
 		if (authType.equals("Facebook")) {
-			System.out.println("in factory");
 			return FacebookServiceGateway.getInstance();
 		}
 		else if (authType.equals("Google")) {

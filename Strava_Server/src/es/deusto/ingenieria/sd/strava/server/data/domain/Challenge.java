@@ -15,6 +15,8 @@ public class Challenge {
 	private float targetDistance;
 	private int targetTime; 
 	
+	@Persistent(defaultFetchGroup="true")
+	private User creator;
 	
 	public Challenge() {
 		

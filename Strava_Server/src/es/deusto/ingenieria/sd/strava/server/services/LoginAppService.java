@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.deusto.ingenieria.sd.strava.server.data.dao.UserDAO;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.factory.LoginFactory;
 
@@ -55,20 +56,34 @@ public class LoginAppService {
 	public User login(String email, String hashedPassword, String type) throws RemoteException {
 		User existingUser = new User();
 		if (type.equals("normal")) {
-			for (User user : users) {
-				String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword());
-				if (user.getEmail().equals(email) && sha1.equals(hashedPassword)) {
+				User user = UserDAO.getInstance().find(email);
+				System.out.println(user);
+				System.out.println("Password from db: " + user.getPassword());
+				System.out.println("Password from login: " + hashedPassword);
+				if (user != null && user.checkPassword(hashedPassword)) {
 					existingUser = user;
+				} 
+				else {
+					existingUser = null;
 				}
-			}
-		}
+		} 
+
+			
+			/*
+			 * for (User user : users) { String sha1 =
+			 * org.apache.commons.codec.digest.DigestUtils.sha1Hex(user.getPassword()); if
+			 * (user.getEmail().equals(email) && sha1.equals(hashedPassword)) { existingUser
+			 * = user; } }
+			 */
 		if (type.equals("Google") || type.equals("Facebook")) {
 			LoginFactory factory = new LoginFactory();
 			try {
 				boolean userExist = factory.createServiceGateways(type).login(email, hashedPassword);
 				if (userExist) {
-					existingUser.setEmail(email);
-					existingUser.setPassword(hashedPassword);
+					existingUser = UserDAO.getInstance().find(email);
+				}
+				else {
+					existingUser = null;
 				}
 			}
 			catch (RemoteException e) {
@@ -81,24 +96,56 @@ public class LoginAppService {
 
 
 	// registration
-	public User registration(String email, String password, String nickname, String birthdate, int weigth, int heigth,
+	public User registration(String type, String email, String password, String nickname, String birthdate, int weigth, int heigth,
 			int maxrate, int minRate) {
-		// TODO: Get User using DAO and check
+		
 		User user = new User();
-		user.setEmail(email);
-		user.setNickname(nickname);
-		// Generate the hash of the password
-		String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(password);
-		user.setPassword(sha1);
-		// nuevos campos
-		user.setNickname(nickname);
-		user.setWeight(weigth);
-		user.setHeight(heigth);
-		user.setMaxRate(maxrate);
-		user.setMinRate(minRate);
-		user.setBirthdate(birthdate);
-		System.out.println("El user se ha creado bien");
-		this.users.add(user);
+		if (type.equals("normal")) {
+			user.setEmail(email);
+			user.setNickname(nickname);		
+			user.setPassword(password);
+			// nuevos campos
+			user.setNickname(nickname);
+			user.setWeight(weigth);
+			user.setHeight(heigth);
+			user.setMaxRate(maxrate);
+			user.setMinRate(minRate);
+			user.setBirthdate(birthdate);
+			
+			UserDAO.getInstance().save(user);
+			
+			System.out.println("User has been created");
+			this.users.add(user);
+		}
+		
+		if (type.equals("Facebook") || type.equals("Google")) {
+			LoginFactory factory = new LoginFactory();
+			try {
+				boolean existsInFbOrGoogle = factory.createServiceGateways(type).login(email, password);
+				if (existsInFbOrGoogle) {
+					user.setEmail(email);
+					user.setNickname(nickname);		
+					//user.setPassword(password);
+					// nuevos campos
+					user.setNickname(nickname);
+					user.setWeight(weigth);
+					user.setHeight(heigth);
+					user.setMaxRate(maxrate);
+					user.setMinRate(minRate);
+					user.setBirthdate(birthdate);
+					
+					UserDAO.getInstance().save(user);
+					
+					System.out.println("User has been created");
+					this.users.add(user);
+				}
+			}
+			catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return user;
+
 	}
 }
