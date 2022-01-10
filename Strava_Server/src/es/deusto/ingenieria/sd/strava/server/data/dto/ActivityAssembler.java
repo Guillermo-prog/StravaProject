@@ -18,6 +18,7 @@ public class ActivityAssembler {
 	public ActivityDTO ActivityToDTO(Activity activity) {
 		ActivityDTO dto = new ActivityDTO();
 		
+		dto.setUser(activity.getUser());
 		dto.setTitle(activity.getTitle());
 		dto.setSport(activity.getSport());
 		dto.setDistanceKm(activity.getDistanceKm());

@@ -8,6 +8,7 @@ import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.data.dao.ActivityDAO;
+import es.deusto.ingenieria.sd.strava.server.data.dao.UserDAO;
 
 public class TrainingAppService {
 	private static TrainingAppService instance = new TrainingAppService();
@@ -141,7 +142,7 @@ public class TrainingAppService {
 		}		
 	}
 	
-	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) {
+	public boolean createActivity(User user, String title, String sport, Float km, String date, String startTime, int duration) {
 		Activity newActivity = new Activity();
 		newActivity.setTitle(title);
 		newActivity.setSport(sport);
@@ -149,6 +150,14 @@ public class TrainingAppService {
 		newActivity.setStartTime(startTime);
 		newActivity.setDistanceKm(km);
 		newActivity.setDurationMin(duration);
+		newActivity.setUser(user);
+		System.out.println("Aktiviteten innan är: " + newActivity);
+		System.out.println("Usern innan är: " + user);
+		user.createActivity(newActivity);
+		ActivityDAO.getInstance().save(newActivity);
+		System.out.println("Aktiviteten är: " + newActivity);
+		System.out.println("Och usern är: " + user);
+		
 		Boolean activityCanBeAdded = false;
 		
 		for (Activity activity : activities) {
@@ -157,7 +166,8 @@ public class TrainingAppService {
 				//this.activities.add(newActivity);
 				
 				//Save the article in the DB using DAO Pattern
-				ActivityDAO.getInstance().save(newActivity);
+				//user.createActivity(newActivity);
+				//UserDAO.getInstance().save(user);
 				
 				System.out.println("Activity has been added.");	
 				activityCanBeAdded = true;

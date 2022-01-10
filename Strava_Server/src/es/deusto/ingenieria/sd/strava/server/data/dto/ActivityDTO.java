@@ -3,8 +3,10 @@ package es.deusto.ingenieria.sd.strava.server.data.dto;
 import java.sql.Time;
 import java.util.Date;
 import java.io.*;
+import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 
 public class ActivityDTO implements java.io.Serializable {
+	private User user;
 	private String title;
 	private String sport;
 	private float distanceKm;
@@ -12,6 +14,12 @@ public class ActivityDTO implements java.io.Serializable {
 	private String startDate;
 	private float durationMin;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -51,7 +59,7 @@ public class ActivityDTO implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "ActivityDTO [title=" + title + ", sport=" + sport + ", distanceKm=" + distanceKm + ", startTime="
-				+ startTime + ", startDate=" + startDate + ", durationMin=" + durationMin + "]";
+				+ startTime + ", startDate=" + startDate + ", durationMin=" + durationMin + "User=" + user + "]";
 	}
 	
 	

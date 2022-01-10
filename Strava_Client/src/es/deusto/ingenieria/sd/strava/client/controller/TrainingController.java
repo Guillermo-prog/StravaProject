@@ -33,9 +33,9 @@ public class TrainingController {
 		}
 	}
 	
-	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) {
+	public boolean createActivity(long token, String title, String sport, Float km, String date, String startTime, int duration) {
 		try {
-			return this.serviceLocator.getService().createActivity(title, sport, km, date, startTime, duration);
+			return this.serviceLocator.getService().createActivity(token, title, sport, km, date, startTime, duration);
 		} catch (RemoteException e) {
 			return false;
 		}

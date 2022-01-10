@@ -19,7 +19,7 @@
 	<target name="1.build" description="Builds the project">
 		<delete dir="${build.dir}"/>
 		<mkdir dir="${build.dir}"/>
-		<javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+		<javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" debug="true" includeantruntime="no"/>
     </target>
     
 	<target name="2.client" depends="1.build"  description="Runs Client program">

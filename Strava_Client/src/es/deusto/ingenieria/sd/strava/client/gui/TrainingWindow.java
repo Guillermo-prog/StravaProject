@@ -40,8 +40,8 @@ public class TrainingWindow {
 		this.loginToken = token;
 	}
 
-	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) {
-		boolean activityStarted = this.controller.createActivity(title, sport, km, date, startTime, duration);
+	public boolean createActivity(long token, String title, String sport, Float km, String date, String startTime, int duration) {
+		boolean activityStarted = this.controller.createActivity(token, title, sport, km, date, startTime, duration);
 		System.out.println("Activity Created!");
 		return activityStarted;
 	}
@@ -272,7 +272,7 @@ public class TrainingWindow {
 						AstartTime = activityStartTimeBox.getText();
 //						Aduration = activityDurationTimeBox.getText();
 						
-						boolean activityStatus = createActivity(Atitle, Asport, Akm, Adate, AstartTime, Aduration);
+						boolean activityStatus = createActivity(loginToken, Atitle, Asport, Akm, Adate, AstartTime, Aduration);
 						System.out.println("Challenge created: " + activityStatus);
 						
 						b.setVisible(true);

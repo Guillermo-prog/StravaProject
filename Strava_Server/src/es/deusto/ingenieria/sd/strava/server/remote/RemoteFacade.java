@@ -107,10 +107,20 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException {			
-		boolean activityCreatedStatus = TrainingAppService.getInstance().createActivity(title, sport, km, date, startTime, duration);
+	public boolean createActivity(long token, String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException {	
+		
+		if (this.serverState.containsKey(token)) {						
+			//Make the bid using Bid Application Service
+			System.out.println("Usern från staten är: " + this.serverState.get(token));
+			if (TrainingAppService.getInstance().createActivity(this.serverState.get(token), title, sport, km, date, startTime, duration)) {
+				return true;
+			} else {
+				throw new RemoteException("createActivity fails!");
+			}
+		} else {
+			throw new RemoteException("To create an activity you must first log in");
+		}
 
-		return activityCreatedStatus;
 	}
 	
 	
