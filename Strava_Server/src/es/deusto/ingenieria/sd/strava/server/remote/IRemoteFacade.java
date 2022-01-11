@@ -16,7 +16,7 @@ public interface IRemoteFacade extends Remote {
 
 	public void logout(long token) throws RemoteException;
 
-	public long registration(String type, String email, String password, String nickname, String birthdate, int weigth, int heigth,
+	public boolean registration(String type, String email, String password, String nickname, String birthdate, int weigth, int heigth,
 			int maxrate, int minRate) throws RemoteException;
 
 

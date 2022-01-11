@@ -93,7 +93,7 @@ public class LoginAppService {
 		return existingUser;
 
 	};
-
+	
 
 	// registration
 	public User registration(String type, String email, String password, String nickname, String birthdate, int weigth, int heigth,
@@ -111,9 +111,7 @@ public class LoginAppService {
 			user.setMaxRate(maxrate);
 			user.setMinRate(minRate);
 			user.setBirthdate(birthdate);
-			
 			UserDAO.getInstance().save(user);
-			
 			System.out.println("User has been created");
 			this.users.add(user);
 		}
@@ -138,13 +136,16 @@ public class LoginAppService {
 					
 					System.out.println("User has been created");
 					this.users.add(user);
+			
+				}
+				else {
+					user = null;
 				}
 			}
 			catch (RemoteException e) {
 				e.printStackTrace();
 			}
 		}
-		
 		return user;
 
 	}

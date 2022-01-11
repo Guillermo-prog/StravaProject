@@ -132,24 +132,32 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public long registration(String type, String email, String password, String nickname,String birthdate, int weigth, int heigth, int maxrate,
+	public boolean registration(String type, String email, String password, String nickname,String birthdate, int weigth, int heigth, int maxrate,
 			int minRate) throws RemoteException {
 		User user = LoginAppService.getInstance().registration(type, email, password,nickname,birthdate,weigth, heigth, maxrate,
 				minRate);
-		System.out.println("user i remote" + user);
 		if (user != null) {
-			// If user is not logged in
-			if (!this.serverState.values().contains(user)) {
-				Long token = Calendar.getInstance().getTimeInMillis();
-				this.serverState.put(token, user);
-				System.out.println("token i remote reg" + token);
-				return (token);
-			} else {
-				throw new RemoteException("User is already registered in!");
-			}
-		} else {
-			throw new RemoteException("Register fails!");
+			System.out.println("Returneras en user");
+			return true;
 		}
+		else {
+			System.out.println("Eller returneras null");
+			return false;
+		}
+	
+//		if (user != null) {
+//			// If user is not logged in
+//			if (!this.serverState.values().contains(user)) {
+//				Long token = Calendar.getInstance().getTimeInMillis();
+//				this.serverState.put(token, user);
+//				System.out.println("token i remote reg" + token);
+//				return (token);
+//			} else {
+//				throw new RemoteException("User is already registered in!");
+//			}
+//		} else {
+//			throw new RemoteException("Register fails!");
+//		}
 
 	}
 	

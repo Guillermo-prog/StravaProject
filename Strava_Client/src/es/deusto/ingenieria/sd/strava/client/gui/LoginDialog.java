@@ -239,28 +239,7 @@ public class LoginDialog {
 			public void actionPerformed(ActionEvent e) {
 				c.setBounds(200, 250, 95, 30);
 
-				emailBox.setVisible(false);
-				lemail.setVisible(false);
-				pass.setVisible(false);
-				lpass.setVisible(false);
-				
-				lname.setVisible(false);
-				name.setVisible(false);
 
-				lweigth.setVisible(false);
-				weigth.setVisible(false);
-
-				lheight.setVisible(false);
-				height.setVisible(false);
-
-				lmaxrate.setVisible(false);
-				maxrate.setVisible(false);
-
-				lminrate.setVisible(false);
-				minrate.setVisible(false);
-
-				lbirth.setVisible(false);
-				birthBox.setVisible(false);
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -277,19 +256,39 @@ public class LoginDialog {
 				System.out.println("lanza register");
 				boolean result = controller.registration("normal", email, sha1, nickname, dbirthdate, dweight, dheight, dmaxRate,
 						dminRate);
+				
 
 				System.out.println("devuelve register");
 				JOptionPane.showMessageDialog(null, "Register result");
 
-				long loginToken = controller.getToken();
-				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
+				if (result) {
 
-				System.out.println("token i reg: " + loginToken);
-				if (loginToken != -1) {
-					TrainingController trainingController = new TrainingController(serviceLocator);
-					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
-					trainingWindow.TrainingFrame();
-					f.setVisible(false);
+					lname.setVisible(false);
+					name.setVisible(false);
+
+					lweigth.setVisible(false);
+					weigth.setVisible(false);
+
+					lheight.setVisible(false);
+					height.setVisible(false);
+
+					lmaxrate.setVisible(false);
+					maxrate.setVisible(false);
+
+					lminrate.setVisible(false);
+					minrate.setVisible(false);
+
+					lbirth.setVisible(false);
+					birthBox.setVisible(false);
+					
+					fbRegButton.setVisible(false);
+					googleRegButton.setVisible(false);
+					d.setVisible(false);
+					
+					b.setVisible(true);
+					bfacebook.setVisible(true);
+					bgoogle.setVisible(true);
+					
 				}
 
 			}
@@ -300,29 +299,6 @@ public class LoginDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c.setBounds(200, 250, 95, 30);
-
-				emailBox.setVisible(false);
-				lemail.setVisible(false);
-				pass.setVisible(false);
-				lpass.setVisible(false);
-				
-				lname.setVisible(false);
-				name.setVisible(false);
-
-				lweigth.setVisible(false);
-				weigth.setVisible(false);
-
-				lheight.setVisible(false);
-				height.setVisible(false);
-
-				lmaxrate.setVisible(false);
-				maxrate.setVisible(false);
-
-				lminrate.setVisible(false);
-				minrate.setVisible(false);
-
-				lbirth.setVisible(false);
-				birthBox.setVisible(false);
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -343,15 +319,32 @@ public class LoginDialog {
 				System.out.println("devuelve register");
 				JOptionPane.showMessageDialog(null, "Register result");
 
-				long loginToken = controller.getToken();
-				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
+				if (result) {
+					lname.setVisible(false);
+					name.setVisible(false);
 
-				System.out.println("token i reg: " + loginToken);
-				if (loginToken != -1) {
-					TrainingController trainingController = new TrainingController(serviceLocator);
-					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
-					trainingWindow.TrainingFrame();
-					f.setVisible(false);
+					lweigth.setVisible(false);
+					weigth.setVisible(false);
+
+					lheight.setVisible(false);
+					height.setVisible(false);
+
+					lmaxrate.setVisible(false);
+					maxrate.setVisible(false);
+
+					lminrate.setVisible(false);
+					minrate.setVisible(false);
+
+					lbirth.setVisible(false);
+					birthBox.setVisible(false);
+					
+					fbRegButton.setVisible(false);
+					googleRegButton.setVisible(false);
+					d.setVisible(false);
+					
+					b.setVisible(true);
+					bfacebook.setVisible(true);
+					bgoogle.setVisible(true);
 				}
 
 			}
@@ -362,29 +355,6 @@ public class LoginDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c.setBounds(200, 250, 95, 30);
-
-				emailBox.setVisible(false);
-				lemail.setVisible(false);
-				pass.setVisible(false);
-				lpass.setVisible(false);
-				
-				lname.setVisible(false);
-				name.setVisible(false);
-
-				lweigth.setVisible(false);
-				weigth.setVisible(false);
-
-				lheight.setVisible(false);
-				height.setVisible(false);
-
-				lmaxrate.setVisible(false);
-				maxrate.setVisible(false);
-
-				lminrate.setVisible(false);
-				minrate.setVisible(false);
-
-				lbirth.setVisible(false);
-				birthBox.setVisible(false);
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -405,15 +375,32 @@ public class LoginDialog {
 				System.out.println("devuelve register");
 				JOptionPane.showMessageDialog(null, "Register result");
 
-				long loginToken = controller.getToken();
-				JOptionPane.showMessageDialog(null, "Token: " + loginToken);
+				if (result) {
+					lname.setVisible(false);
+					name.setVisible(false);
 
-				System.out.println("token i reg: " + loginToken);
-				if (loginToken != -1) {
-					TrainingController trainingController = new TrainingController(serviceLocator);
-					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
-					trainingWindow.TrainingFrame();
-					f.setVisible(false);
+					lweigth.setVisible(false);
+					weigth.setVisible(false);
+
+					lheight.setVisible(false);
+					height.setVisible(false);
+
+					lmaxrate.setVisible(false);
+					maxrate.setVisible(false);
+
+					lminrate.setVisible(false);
+					minrate.setVisible(false);
+
+					lbirth.setVisible(false);
+					birthBox.setVisible(false);
+					
+					fbRegButton.setVisible(false);
+					googleRegButton.setVisible(false);
+					d.setVisible(false);
+					
+					b.setVisible(true);
+					bfacebook.setVisible(true);
+					bgoogle.setVisible(true);
 				}
 
 			}

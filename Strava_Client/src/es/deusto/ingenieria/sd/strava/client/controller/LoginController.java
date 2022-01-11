@@ -11,7 +11,7 @@ public class LoginController {
 	private ServiceLocator serviceLocator;
 	//This attribute stores the token when login success
 	private long token = -1; //-1 = login has not been done or fails
-
+	private boolean registrationDone = false;
 	public LoginController(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator;
 	}
@@ -29,13 +29,12 @@ public class LoginController {
 	
 	public boolean registration(String type, String email, String password,String nickname,String birthdate,int weigth,int heigth,int maxrate,int minRate) {
 		try {
-			this.token = this.serviceLocator.getService().registration(type, email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
-			System.out.println("token i logincontroller" + this.token);
-			return true;
+			this.registrationDone = this.serviceLocator.getService().registration(type, email, password,nickname,birthdate, weigth,heigth,maxrate,minRate);			
+			return this.registrationDone;
 		} catch (RemoteException e) {
 			System.out.println("# Error during registration: " + e);
-			this.token = -1;
-			return false;
+			this.registrationDone= false;
+			return this.registrationDone;
 		}
 	}
 	
