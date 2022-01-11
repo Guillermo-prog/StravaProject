@@ -33,6 +33,14 @@ public class Activity {
 		this.startDate = startDate;
 		this.durationMin = durationMin;
 	}
+	
+	public User getUser(){
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public String getTitle() {
 		return title;
@@ -74,6 +82,6 @@ public class Activity {
 	@Override
 	public String toString() {
 		return "Activity [title=" + title + ", sport=" + sport + ", distanceKm=" + distanceKm + ", startTime="
-				+ startTime + ", startDate=" + startDate + ", durationMin=" + durationMin + "]";
+				+ startTime + ", startDate=" + startDate + ", durationMin=" + durationMin + "User=" + user + "]";
 	}
 }

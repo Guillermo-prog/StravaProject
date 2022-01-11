@@ -10,7 +10,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(detachable="true")
 public class User {
-	@PrimaryKey
+//	@PrimaryKey
 	private String email;
 	private String password;
 	private String nickname;
@@ -130,9 +130,11 @@ public class User {
 		}
 	}
 
-	public boolean startActivity(String title, String sport) {
-		// TODO Create here the activity, taking into account the class diagram
-		return true;
+
+	public void createActivity(Activity activity) {
+		if (activity != null && !this.activities.contains(activity)) {
+			this.activities.add(activity);
+		}
 	}
 
 	

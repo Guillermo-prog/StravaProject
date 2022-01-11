@@ -20,7 +20,7 @@ public interface IRemoteFacade extends Remote {
 			int maxrate, int minRate) throws RemoteException;
 
 
-	public boolean createActivity(String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException;
+	public boolean createActivity(long token, String title, String sport, Float km, String date, String startTime, int duration) throws RemoteException;
 
 	public List<ChallengeDTO> getChallenges() throws RemoteException;
 
