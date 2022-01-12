@@ -151,26 +151,15 @@ public class TrainingAppService {
 		newActivity.setStartTime(startTime);
 		newActivity.setDistanceKm(km);
 		newActivity.setDurationMin(duration);
-		System.out.println("Usern innan allt är: " + user);
 		newActivity.setUser(userInDb);
-		System.out.println("Aktiviteten innan är: " + newActivity);
-		System.out.println("Usern innan är: " + user);
-		userInDb.createActivity(newActivity);
-		System.out.println("Usern mitt emellan allting är: " + user);
-		ActivityDAO.getInstance().save(newActivity);
-		System.out.println("Aktiviteten är: " + newActivity);
-		System.out.println("Och usern är: " + user);
 		
 		Boolean activityCanBeAdded = false;
 		
 		for (Activity activity : activities) {
 			if (!title.equals(activity.getTitle())) { 
-				//this row below should be deleted ?
-				//this.activities.add(newActivity);
 				
-				//Save the article in the DB using DAO Pattern
-				//user.createActivity(newActivity);
-				//UserDAO.getInstance().save(user);
+				userInDb.createActivity(newActivity);
+				ActivityDAO.getInstance().save(newActivity);
 				
 				System.out.println("Activity has been added.");	
 				activityCanBeAdded = true;
