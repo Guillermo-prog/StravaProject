@@ -31,7 +31,6 @@ public class DataAccessObjectBase {
 	public void saveObject(Object object) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-
 		try {
 			tx.begin();
 			pm.makePersistent(object);

@@ -7,8 +7,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 
 @PersistenceCapable(detachable="true")
-public class Activity {
-	@PrimaryKey
+public class Activity{
 	private String title;
 	private String sport;
 	private float distanceKm;
@@ -19,20 +18,20 @@ public class Activity {
 	@Persistent(defaultFetchGroup="true")
 	private User user;
 	
-	public Activity() {
-		
-	}
-	
-	
-	public Activity(String title, String sport, float distanceKm, String startTime, String startDate, float durationMin) {
-		
-		this.title = title;
-		this.sport = sport;
-		this.distanceKm = distanceKm;
-		this.startTime = startTime;
-		this.startDate = startDate;
-		this.durationMin = durationMin;
-	}
+//	public Activity() {
+//		
+//	}
+//	
+//	
+//	public Activity(String title, String sport, float distanceKm, String startTime, String startDate, float durationMin) {
+//		
+//		this.title = title;
+//		this.sport = sport;
+//		this.distanceKm = distanceKm;
+//		this.startTime = startTime;
+//		this.startDate = startDate;
+//		this.durationMin = durationMin;
+//	}
 	
 	public User getUser(){
 		return user;

@@ -2,9 +2,15 @@
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
-	<classpathentry kind="lib" path="C:/SoftLabs/SD/stravaMaster/Strava_Server/lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/commons-codec-1.15.jar"/>
 	<classpathentry kind="con" path="C:/SoftLabs/SD/stravaMaster/Strava_Server/bin"/>
-	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="lib/javax.jdo-3.2.0-m12.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/datanucleus-api-jdo-6.0.0-m2.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/datanucleus-cache-6.0.0-m2.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/datanucleus-core-6.0.0-m2.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/datanucleus-rdbms-6.0.0-m2.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/javax.activation-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/SoftLabs/SD/StravaProject-master/Strava_Server/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

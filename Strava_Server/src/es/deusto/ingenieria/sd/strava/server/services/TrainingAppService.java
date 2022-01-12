@@ -143,6 +143,7 @@ public class TrainingAppService {
 	}
 	
 	public boolean createActivity(User user, String title, String sport, Float km, String date, String startTime, int duration) {
+		User userInDb = UserDAO.getInstance().find(String.valueOf(user.getEmail()));
 		Activity newActivity = new Activity();
 		newActivity.setTitle(title);
 		newActivity.setSport(sport);
@@ -151,13 +152,12 @@ public class TrainingAppService {
 		newActivity.setDistanceKm(km);
 		newActivity.setDurationMin(duration);
 		System.out.println("Usern innan allt är: " + user);
-		newActivity.setUser(user);
+		newActivity.setUser(userInDb);
 		System.out.println("Aktiviteten innan är: " + newActivity);
 		System.out.println("Usern innan är: " + user);
-		user.createActivity(newActivity);
+		userInDb.createActivity(newActivity);
 		System.out.println("Usern mitt emellan allting är: " + user);
-		//ActivityDAO.getInstance().save(newActivity);
-		//UserDAO.getInstance().save(user);
+		ActivityDAO.getInstance().save(newActivity);
 		System.out.println("Aktiviteten är: " + newActivity);
 		System.out.println("Och usern är: " + user);
 		

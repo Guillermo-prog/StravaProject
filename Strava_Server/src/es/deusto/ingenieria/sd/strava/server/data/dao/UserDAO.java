@@ -70,6 +70,8 @@ public class UserDAO extends DataAccessObjectBase implements IDataAccessObject<U
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(5);
 		
+		pm.setDetachAllOnCommit(true);
+		
 		Transaction tx = pm.currentTransaction();
 
 		User result = null; 

@@ -10,7 +10,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(detachable="true")
 public class User {
-//	@PrimaryKey
+	//@PrimaryKey
 	private String email;
 	private String password;
 	private String nickname;
