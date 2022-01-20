@@ -89,7 +89,7 @@ public class TrainingWindow {
 		// Create Activity Fields:
 		final JLabel activityHeadline = new JLabel("CREATE ACTIVITY");
 		activityHeadline.setBounds(120, 5, 150, 20);
-		final JLabel activityTitle = new JLabel("Title of Activity:");
+		final JLabel activityTitle = new JLabel("Title of Activity: ");
 		activityTitle.setBounds(120, 20, 150, 20);
 		final JTextField activityTitleBox = new JTextField();
 		activityTitleBox.setBounds(120, 40, 150, 20);

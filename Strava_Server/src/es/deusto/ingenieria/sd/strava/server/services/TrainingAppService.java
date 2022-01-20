@@ -171,7 +171,7 @@ public class TrainingAppService {
 		}
 		
 		else {
-			System.out.println("Activity already exist or the values are null.");
+			System.out.println("Activity already exist or the values are null. ");
 		}
 		
 		return activityCanBeAdded;	
