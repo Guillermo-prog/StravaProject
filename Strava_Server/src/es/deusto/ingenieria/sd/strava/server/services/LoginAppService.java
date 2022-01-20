@@ -132,6 +132,7 @@ public class LoginAppService {
 					user.setMinRate(minRate);
 					user.setBirthdate(birthdate);
 					
+					
 					UserDAO.getInstance().save(user);
 					
 					System.out.println("User has been created");

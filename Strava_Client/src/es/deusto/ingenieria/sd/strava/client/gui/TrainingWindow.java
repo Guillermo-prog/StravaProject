@@ -303,6 +303,8 @@ public class TrainingWindow {
 						activityKmBox.setText("");
 						activityStartTimeBox.setText("");
 						activityDurationTimeBox.setText("");	
+						
+						((JButton) e.getSource()).removeActionListener(this);
 					}
 				});
 				b.setVisible(false);
@@ -403,7 +405,8 @@ public class TrainingWindow {
 
 						boolean createdChallengeStatus = createChallenge(Ctitle, Csport, Cstart, Cend, CtargetDistance, CtargetTime);
 						System.out.println("Challenge created: " + createdChallengeStatus);
-
+						
+						((JButton) e.getSource()).removeActionListener(this);
 					}
 				});
 

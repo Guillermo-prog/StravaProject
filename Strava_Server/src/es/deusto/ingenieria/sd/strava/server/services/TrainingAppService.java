@@ -153,22 +153,27 @@ public class TrainingAppService {
 		newActivity.setDurationMin(duration);
 		newActivity.setUser(userInDb);
 		
-		Boolean activityCanBeAdded = false;
+		List<Activity> activityList = ActivityDAO.getInstance().getAll();
 		
-		for (Activity activity : activities) {
-			if (!title.equals(activity.getTitle())) { 
-				
-				userInDb.createActivity(newActivity);
-				ActivityDAO.getInstance().save(newActivity);
-				
-				System.out.println("Activity has been added.");	
-				activityCanBeAdded = true;
+		Boolean activityCanBeAdded = true;
+		
+		for (Activity activity : activityList) {
+			if (title.equals(activity.getTitle())) { 
+				activityCanBeAdded = false;
 				break;
 			}
-			else {
-				System.out.println("Activity already exist or the values are null.");
-			}
 		}
+		
+		if(activityCanBeAdded) {
+			userInDb.createActivity(newActivity);
+			ActivityDAO.getInstance().save(newActivity);			
+			System.out.println("Activity has been added.");	
+		}
+		
+		else {
+			System.out.println("Activity already exist or the values are null.");
+		}
+		
 		return activityCanBeAdded;	
 
 	}
