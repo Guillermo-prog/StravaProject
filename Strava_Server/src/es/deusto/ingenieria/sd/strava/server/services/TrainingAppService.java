@@ -173,8 +173,8 @@ public class TrainingAppService {
 		newActivity.setDurationMin(duration);
 		newActivity.setUser(userInDb);
 		
-		List<Activity> activityList = ActivityDAO.getInstance().getAll();
-		
+		List<Activity> activityList = userInDb.getActivities();
+
 		Boolean activityCanBeAdded = true;
 		
 		for (Activity activity : activityList) {
