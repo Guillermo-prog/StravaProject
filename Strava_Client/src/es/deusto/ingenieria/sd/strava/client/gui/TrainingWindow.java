@@ -20,6 +20,7 @@ public class TrainingWindow {
 	private TrainingController controller;
 	private long loginToken;
 	
+	
 	private String Ctitle;
 	private String Csport;
 	private String Cstart;
@@ -34,10 +35,12 @@ public class TrainingWindow {
 	private String AstartTime;
 	private int Aduration;
 	
+	private JFrame loginWindow;
 
-	public TrainingWindow(TrainingController training, long token) {
+	public TrainingWindow(TrainingController training, long token, JFrame j) {
 		this.controller = training;
 		this.loginToken = token;
+		this.loginWindow = j;
 	}
 
 	public boolean createActivity(long token, String title, String sport, Float km, String date, String startTime, int duration) {
@@ -76,6 +79,7 @@ public class TrainingWindow {
 	public void logout(long token) {
 		System.out.println(" - Logout from the server...");
 		this.controller.logout(token);
+		this.loginWindow.setVisible(true);
 		System.out.println("\t* Logout success!");
 	}
 	

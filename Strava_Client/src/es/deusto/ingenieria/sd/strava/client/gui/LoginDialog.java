@@ -133,7 +133,7 @@ public class LoginDialog {
 
 				 if (loginToken != -1) {
 				 	TrainingController trainingController = new TrainingController(serviceLocator);
-				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken, f);
 				 	trainingWindow.TrainingFrame();
 				 	f.setVisible(false);
 				 }
@@ -158,7 +158,7 @@ public class LoginDialog {
 
 				 if (loginToken != -1) {
 				 	TrainingController trainingController = new TrainingController(serviceLocator);
-				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+				 	TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken, f);
 				 	trainingWindow.TrainingFrame();
 				 	f.setVisible(false);
 				 }
@@ -190,7 +190,7 @@ public class LoginDialog {
 
 				if (loginToken != -1) {
 					TrainingController trainingController = new TrainingController(serviceLocator);
-					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken);
+					TrainingWindow trainingWindow = new TrainingWindow(trainingController, loginToken, f);
 					trainingWindow.TrainingFrame();
 					f.setVisible(false);
 				}
@@ -203,7 +203,6 @@ public class LoginDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c.setBounds(200, 300, 95, 30);
 				b.setVisible(false);
 				c.setVisible(false);
 				bfacebook.setVisible(false);
@@ -237,9 +236,6 @@ public class LoginDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c.setBounds(200, 250, 95, 30);
-
-
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -262,6 +258,8 @@ public class LoginDialog {
 				JOptionPane.showMessageDialog(null, "Register result");
 
 				if (result) {
+					
+					JOptionPane.showMessageDialog(null, "Registration made succcesfully!");
 
 					lname.setVisible(false);
 					name.setVisible(false);
@@ -288,7 +286,7 @@ public class LoginDialog {
 					b.setVisible(true);
 					bfacebook.setVisible(true);
 					bgoogle.setVisible(true);
-					
+					c.setVisible(true);
 				}
 
 			}
@@ -298,7 +296,6 @@ public class LoginDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c.setBounds(200, 250, 95, 30);
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -320,6 +317,9 @@ public class LoginDialog {
 				JOptionPane.showMessageDialog(null, "Register result");
 
 				if (result) {
+					
+					JOptionPane.showMessageDialog(null, "Registration made succcesfully!");
+					
 					lname.setVisible(false);
 					name.setVisible(false);
 
@@ -345,6 +345,7 @@ public class LoginDialog {
 					b.setVisible(true);
 					bfacebook.setVisible(true);
 					bgoogle.setVisible(true);
+					c.setVisible(true);
 				}
 
 			}
@@ -354,7 +355,6 @@ public class LoginDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c.setBounds(200, 250, 95, 30);
 
 				email = emailBox.getText();
 				password = pass.getText();
@@ -376,6 +376,9 @@ public class LoginDialog {
 				JOptionPane.showMessageDialog(null, "Register result");
 
 				if (result) {
+					
+					JOptionPane.showMessageDialog(null, "Registration made succcesfully!");
+					
 					lname.setVisible(false);
 					name.setVisible(false);
 
@@ -401,6 +404,7 @@ public class LoginDialog {
 					b.setVisible(true);
 					bfacebook.setVisible(true);
 					bgoogle.setVisible(true);
+					c.setVisible(true);
 				}
 
 			}
