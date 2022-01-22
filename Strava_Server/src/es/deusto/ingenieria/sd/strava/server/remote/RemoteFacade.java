@@ -78,9 +78,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public List<ActivityDTO> getActivities() throws RemoteException {
+	public List<ActivityDTO> getActivities(long token) throws RemoteException {
 
-		List<Activity> activities = TrainingAppService.getInstance().getActivities();
+		List<Activity> activities = TrainingAppService.getInstance().getActivities(this.serverState.get(token));
 		
 		if (activities != null) {
 			

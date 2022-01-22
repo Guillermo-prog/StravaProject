@@ -3,20 +3,31 @@ package es.deusto.ingenieria.sd.strava.server.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.Extent;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Activity;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.User;
 import es.deusto.ingenieria.sd.strava.server.data.dao.ActivityDAO;
+import es.deusto.ingenieria.sd.strava.server.data.dao.ChallengeDAO;
+import es.deusto.ingenieria.sd.strava.server.data.dao.IDataAccessObject;
 import es.deusto.ingenieria.sd.strava.server.data.dao.UserDAO;
 
 public class TrainingAppService {
 	private static TrainingAppService instance = new TrainingAppService();
-
+	private PersistenceManagerFactory pmf;
 	//TODO: remove when DAO Pattern is implemented
 	private List<Challenge> challenges = new ArrayList<>();
 	private List<Activity> activities = new ArrayList<>();
 	//TODO: remove when DAO Pattern is implemented
+	
+	private ChallengeDAO challangeDAO;
+	private ActivityDAO activityDAO;
+	private UserDAO userDAO;
+	
 	private TrainingAppService() {
 		this.initializeData();
 	}
@@ -79,14 +90,23 @@ public class TrainingAppService {
 	public static TrainingAppService getInstance() {
 		return instance;
 	}
+
 	public List<Challenge> getChallenges() {
-		//TODO: Get all the categories using DAO Pattern	
+		this.challenges = challangeDAO.getInstance().getAll();
+		System.out.println("Returning Challenges to client ....");
 		return this.challenges;
 	}
-	public List<Activity> getActivities() {
-		//TODO: Get all the categories using DAO Pattern	
+	
+//	public List<Activity> getActivities() {
+//		this.activities = activityDAO.getInstance().getAll();
+//		System.out.println("Returning Activities to client ....");
+//		return this.activities;
+//	}
+	public List<Activity> getActivities(User user) {
+		this.activities = userDAO.getInstance().find(user.getEmail()).getActivities();
+		System.out.println("Returning Activities to client ....");
 		return this.activities;
-	}	
+	}
 
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime ) {
 		Challenge newChallenge = new Challenge();

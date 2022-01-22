@@ -24,7 +24,7 @@ public interface IRemoteFacade extends Remote {
 
 	public List<ChallengeDTO> getChallenges() throws RemoteException;
 
-	public List<ActivityDTO> getActivities() throws RemoteException;
+	public List<ActivityDTO> getActivities(long token) throws RemoteException;
 
 	public boolean createChallenge(String title, String sport, String start, String end, Float targetDistance, int targetTime ) throws RemoteException;
 

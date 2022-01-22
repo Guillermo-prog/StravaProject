@@ -14,10 +14,10 @@ public class TrainingController {
 		this.serviceLocator = serviceLocator;
 	}
 	
-	public List<ActivityDTO> getActivities(){
+	public List<ActivityDTO> getActivities(long token){
 		try {
 			
-			return this.serviceLocator.getService().getActivities();
+			return this.serviceLocator.getService().getActivities(token);
 		} catch (RemoteException e) {
 			System.out.println("#Error getting all activites : " + e);
 			return null;

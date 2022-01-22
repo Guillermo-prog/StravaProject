@@ -46,8 +46,8 @@ public class TrainingWindow {
 		return activityStarted;
 	}
 
-	public List<ActivityDTO> getActivities() {
-		List<ActivityDTO> activities = this.controller.getActivities();
+	public List<ActivityDTO> getActivities(long token) {
+		List<ActivityDTO> activities = this.controller.getActivities(token);
 
 		for (ActivityDTO activity : activities) {
 			System.out.println("Activities: " + activity);
@@ -160,11 +160,11 @@ public class TrainingWindow {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						List<ActivityDTO> activityList = getActivities();
+						List<ActivityDTO> activityList = getActivities(loginToken);
 
 						int i = 0;
 						
-						for (ActivityDTO act : getActivities()) {
+						for (ActivityDTO act : getActivities(loginToken)) {
 							JTextField activitiesBox = new JTextField();
 							activitiesBox.setBounds(90, 170 + i, 290, 40);
 							activitiesBox.setEditable(false);

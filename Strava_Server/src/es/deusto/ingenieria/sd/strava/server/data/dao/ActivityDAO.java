@@ -36,7 +36,7 @@ public class ActivityDAO extends DataAccessObjectBase implements IDataAccessObje
 	}
 
 	@Override
-	public List<Activity> getAll() {				
+	public List<Activity> getAll(String email) {	// el get all por usuario			
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.setDetachAllOnCommit(true);
 		Transaction tx = pm.currentTransaction();
@@ -48,8 +48,10 @@ public class ActivityDAO extends DataAccessObjectBase implements IDataAccessObje
 			
 			Extent<Activity> extent = pm.getExtent(Activity.class, true);
 
-			for (Activity Activity : extent) {
-				activities.add(Activity);
+			for (Activity activity : extent) {
+				if(activity.getUser().getEmail().equals(email)) {
+					activities.add(activity);
+				}
 			}
 
 			tx.commit();
@@ -65,6 +67,7 @@ public class ActivityDAO extends DataAccessObjectBase implements IDataAccessObje
 
 		return activities;		
 	}
+	
 
 	@Override
 	public Activity find(String param) {
