@@ -83,7 +83,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		List<Activity> activities = TrainingAppService.getInstance().getActivities(this.serverState.get(token));
 		
 		if (activities != null) {
-			
+			System.out.println("I RemoteFacade: " + ActivityAssembler.getInstance().activityToDTO(activities));
 			return ActivityAssembler.getInstance().activityToDTO(activities);
 		} else {
 			throw new RemoteException("getActivities() fails!");

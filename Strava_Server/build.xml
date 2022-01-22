@@ -38,7 +38,7 @@
 	<target name="3.export" depends="1.build" description="Export classes into a .jar file">
 		<delete dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}"/>
-		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class, **/dto/**.class"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class, **/dto/**.class, **/domain/**.class"/>
 	</target>
 	
 	<target name="4.create-db-schema" depends="2.enhance-classes" description="Creates DB Schema on the DB Server">

@@ -104,6 +104,9 @@ public class TrainingAppService {
 //	}
 	public List<Activity> getActivities(User user) {
 		this.activities = userDAO.getInstance().find(user.getEmail()).getActivities();
+		for (Activity activity : activities) {
+			activity.setUser(null);
+		}
 		System.out.println("Returning Activities to client ....");
 		return this.activities;
 	}
