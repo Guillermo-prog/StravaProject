@@ -38,7 +38,7 @@
 	<target name="3.export" depends="1.build" description="Export classes into a .jar file">
 		<delete dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}"/>
-		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class, **/dto/**.class"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/remote/I**.class, **/dto/**.class, **/domain/**.class"/>
 	</target>
 	
 	<target name="4.create-db-schema" depends="2.enhance-classes" description="Creates DB Schema on the DB Server">
@@ -61,6 +61,7 @@
 	        </schematool>
 	</target>
 
+	
 	<target name="6.server" depends="5.delete-db-schema, 4.create-db-schema" description="Runs the Server">
 		<java classname="es.deusto.ingenieria.sd.strava.server.MainProgram" classpathref="classpath" fork="true">
         	<jvmarg value="-Djava.rmi.server.codebase=file:${bin.dir}/"/>

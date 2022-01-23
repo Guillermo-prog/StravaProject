@@ -104,6 +104,9 @@ public class TrainingAppService {
 //	}
 	public List<Activity> getActivities(User user) {
 		this.activities = userDAO.getInstance().find(user.getEmail()).getActivities();
+		for (Activity activity : activities) {
+			activity.setUser(null);
+		}
 		System.out.println("Returning Activities to client ....");
 		return this.activities;
 	}
@@ -116,19 +119,23 @@ public class TrainingAppService {
 		newChallenge.setEnd(end);
 		newChallenge.setTargetDistance(targetDistance);
 		newChallenge.setTargetTime(targetTime);
-		Boolean challengeCanBeAdded = false;
+		Boolean challengeCanBeAdded = true;
 		
-		for (Challenge challenge : challenges) {
-			if (!title.equals(challenge.getTitle())) { 
-				this.challenges.add(newChallenge);
-				System.out.println("Challenge has been added.");	
-				challengeCanBeAdded = true;	
-				break;
+		List<Challenge> challengeList = ChallengeDAO.getInstance().getAll();
+		
+		for (Challenge challenge : challengeList) {
+			if (title.equals(challenge.getTitle())) {
+				System.out.println("Challenge with the same title already exists!");
+				challengeCanBeAdded = false;
+				return challengeCanBeAdded;
 			}
-			else {
-				System.out.println("Challenge already exist or the values are null.");
-			}
+		}	
+		
+		if (challengeCanBeAdded) {
+			ChallengeDAO.getInstance().save(newChallenge);
+			return challengeCanBeAdded;
 		}
+		
 		return challengeCanBeAdded;
 	}
 	
