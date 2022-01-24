@@ -38,7 +38,9 @@ public class LoginGoogleService extends UnicastRemoteObject implements ILoginGoo
 			LoginGoogleService.getInstance();
 			//String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
 			hashGoogle.put("test@gmail.google.com", "$!9PhNz,");
-
+			hashGoogle.put("bill@gmail.com", "bill");
+			hashGoogle.put("strava@gmail.com", "strava");
+			
 			if (hashGoogle.containsKey(email)) {
 				if (hashGoogle.get(email).equals(password)) {
 					loginTrue = true;
