@@ -172,7 +172,7 @@ public class TrainingWindow {
 
 				int i = 0;
 
-				for (ActivityDTO act : getActivities(loginToken)) {
+				for (ActivityDTO act : activityList) {
 					JTextField activitiesBox = new JTextField();
 					activitiesBox.setBounds(90, 170 + i, 290, 40);
 					activitiesBox.setEditable(false);
@@ -185,6 +185,7 @@ public class TrainingWindow {
 				for (JTextField chal : listChal) {
 					chal.setVisible(false);
 				}
+			
 			}
 		});
 
@@ -216,7 +217,7 @@ public class TrainingWindow {
 				List<ChallengeDTO> challengeList = getChallenges();
 
 				int i = 0;
-				for (ChallengeDTO chal : getChallenges()) {
+				for (ChallengeDTO chal : challengeList) {
 					JTextField challengeBox = new JTextField();
 					challengeBox.setBounds(190, 170 + i, 90, 40);
 					challengeBox.setEditable(false);
@@ -283,8 +284,10 @@ public class TrainingWindow {
 											"You have not succeeded in overcoming the challenge "
 													+ compareChalDTO.getTitle());
 								}
-
+								comboAct.removeActionListener(this);
 							}
+							
+							
 
 						});
 
@@ -294,6 +297,8 @@ public class TrainingWindow {
 							public void actionPerformed(ActionEvent e) {
 								comboAct.setVisible(false);
 								bback.setVisible(false);
+								comboList.removeAllItems();
+								comboAct.removeAllItems();
 								for (JTextField chal : listChal) {
 									chal.setVisible(false);
 								}
@@ -305,6 +310,7 @@ public class TrainingWindow {
 
 						});
 						JOptionPane.showMessageDialog(null, "Challenge Accepted!");
+						((JButton) e.getSource()).removeActionListener(this);
 					}
 				});
 
@@ -357,14 +363,14 @@ public class TrainingWindow {
 					public void actionPerformed(ActionEvent e) {
 						Atitle = activityTitleBox.getText();
 						Asport = activitySportBox.getText();
-//						Akm = activityKmBox.getText();
+						Akm = Float.parseFloat(activityKmBox.getText());
 						Adate = activityDateBox.getText();
 						AstartTime = activityStartTimeBox.getText();
-//						Aduration = activityDurationTimeBox.getText();
+						Aduration = Integer.parseInt(activityDurationTimeBox.getText());
 
 						boolean activityStatus = createActivity(loginToken, Atitle, Asport, Akm, Adate, AstartTime,
 								Aduration);
-						System.out.println("Challenge created: " + activityStatus);
+						System.out.println("Activity created: " + activityStatus);
 
 						b.setVisible(true);
 						challenges.setVisible(true);
@@ -490,8 +496,7 @@ public class TrainingWindow {
 						Cstart = startBox.getText();
 						Cend = endBox.getText();
 						// GET THESE TO WORK: (getText doesnt work because of float and int)
-//						CtargetDistance = targetDistBox.getText();
-						CtargetDistance = Float.valueOf(targetDistBox.getText());
+						CtargetDistance = Float.parseFloat(targetDistBox.getText());
 						CtargetTime = Integer.parseInt(targetTimeBox.getText());
 
 						boolean createdChallengeStatus = createChallenge(Ctitle, Csport, Cstart, Cend, CtargetDistance,
