@@ -158,6 +158,31 @@ public class TrainingWindow {
 		targetTime.setBounds(120, 180, 150, 20);
 		final JTextField targetTimeBox = new JTextField();
 		targetTimeBox.setBounds(120, 200, 150, 20);
+		
+		JLabel labelActivities = new JLabel("Activities: ");
+        labelActivities.setBounds(30, 150, 100, 20);
+        labelActivities.setVisible(false);
+
+        JLabel labelChallenges = new JLabel("Challenges: ");
+        labelChallenges.setBounds(190, 150, 100, 20);
+        labelChallenges.setVisible(false);
+        
+		JButton acceptChallenge = new JButton("Accept Challenge");
+		acceptChallenge.setBounds(120, 280, 120, 30);
+		acceptChallenge.setVisible(false);
+
+		JComboBox comboList = new JComboBox();
+		comboList.setBounds(120, 310, 120, 30);
+		comboList.setVisible(false);
+
+		JComboBox comboAct = new JComboBox();
+		comboAct.setBounds(40, 310, 120, 30);
+		comboAct.setVisible(false);
+		
+		JButton bback = new JButton("Go back");
+		bback.setBounds(40, 270, 120, 30);
+		bback.setVisible(false);
+
 
 		ChallengeDTO compareChalDTO;
 
@@ -168,6 +193,14 @@ public class TrainingWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				comboList.setVisible(false);
+				labelActivities.setVisible(false);
+				labelChallenges.setVisible(false);
+				comboAct.setVisible(false);
+				bback.setVisible(false);
+				acceptChallenge.setVisible(false);
+				
 				List<ActivityDTO> activityList = getActivities(loginToken);
 
 				int i = 0;
@@ -195,22 +228,6 @@ public class TrainingWindow {
 		JButton createChallengeButton = new JButton("Create Challenge");
 		createChallengeButton.setBounds(120, 110, 160, 30);
 
-		JButton acceptChallenge = new JButton("Accept Challenge");
-		acceptChallenge.setBounds(120, 280, 120, 30);
-		acceptChallenge.setVisible(false);
-
-		JComboBox comboList = new JComboBox();
-		comboList.setBounds(120, 310, 120, 30);
-		comboList.setVisible(false);
-
-		JComboBox comboAct = new JComboBox();
-		comboAct.setBounds(40, 310, 120, 30);
-		comboAct.setVisible(false);
-
-		JButton bback = new JButton("Go back");
-		bback.setBounds(40, 270, 120, 30);
-		bback.setVisible(false);
-
 		challenges.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -228,6 +245,7 @@ public class TrainingWindow {
 					comboList.addItem(chal.getTitle().toString());
 					i += 40;
 				}
+				labelChallenges.setVisible(true);
 				comboList.setVisible(true);
 				// accept
 				acceptChallenge.setVisible(true);
@@ -245,6 +263,7 @@ public class TrainingWindow {
 						acceptChallenge.setVisible(false);
 
 						// poner cosas
+						labelActivities.setVisible(true);
 						comboAct.setVisible(true);
 						bback.setVisible(true);
 						List<ActivityDTO> activityList = getActivities(loginToken);
@@ -284,7 +303,7 @@ public class TrainingWindow {
 											"You have not succeeded in overcoming the challenge "
 													+ compareChalDTO.getTitle());
 								}
-								comboAct.removeActionListener(this);
+								//comboAct.removeActionListener(this);
 							}
 							
 							
@@ -295,8 +314,12 @@ public class TrainingWindow {
 						bback.addActionListener(new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
+								labelActivities.setVisible(false);
+								labelChallenges.setVisible(false);
 								comboAct.setVisible(false);
 								bback.setVisible(false);
+
+								
 								comboList.removeAllItems();
 								comboAct.removeAllItems();
 								for (JTextField chal : listChal) {
@@ -335,6 +358,13 @@ public class TrainingWindow {
 		b.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				comboList.setVisible(false);
+				labelActivities.setVisible(false);
+				labelChallenges.setVisible(false);
+				comboAct.setVisible(false);
+				bback.setVisible(false);
+				acceptChallenge.setVisible(false);
+				
 				b.setVisible(false);
 				challenges.setVisible(false);
 				activities.setVisible(false);
@@ -371,6 +401,7 @@ public class TrainingWindow {
 						boolean activityStatus = createActivity(loginToken, Atitle, Asport, Akm, Adate, AstartTime,
 								Aduration);
 						System.out.println("Activity created: " + activityStatus);
+						JOptionPane.showMessageDialog(null, "Activity created!");
 
 						b.setVisible(true);
 						challenges.setVisible(true);
@@ -461,6 +492,13 @@ public class TrainingWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				comboList.setVisible(false);
+				labelActivities.setVisible(false);
+				labelChallenges.setVisible(false);
+				comboAct.setVisible(false);
+				bback.setVisible(false);
+				acceptChallenge.setVisible(false);
 
 				b.setVisible(false);
 				challenges.setVisible(false);
@@ -502,6 +540,33 @@ public class TrainingWindow {
 						boolean createdChallengeStatus = createChallenge(Ctitle, Csport, Cstart, Cend, CtargetDistance,
 								CtargetTime);
 						System.out.println("Challenge created: " + createdChallengeStatus);
+						JOptionPane.showMessageDialog(null, "Challenge created!");
+						
+						b.setVisible(true);
+						challenges.setVisible(true);
+						activities.setVisible(true);
+						createChallengeButton.setVisible(true);
+						challengeHeadline.setVisible(false);
+						title.setVisible(false);
+						titleBox.setVisible(false);
+
+						sport.setVisible(false);
+						sportBox.setVisible(false);
+
+						start.setVisible(false);
+						startBox.setVisible(false);
+
+						end.setVisible(false);
+						endBox.setVisible(false);
+
+						targetDist.setVisible(false);
+						targetDistBox.setVisible(false);
+
+						targetTime.setVisible(false);
+						targetTimeBox.setVisible(false);
+
+						backChallengeButton.setVisible(false);
+						sendChallengeButton.setVisible(false);
 
 						((JButton) e.getSource()).removeActionListener(this);
 					}
@@ -648,6 +713,12 @@ public class TrainingWindow {
 		f.add(activityDurationTimeBox);
 		activityDurationTime.setVisible(false);
 		activityDurationTimeBox.setVisible(false);
+		
+		f.add(labelActivities);
+		f.add(labelChallenges);
+		labelActivities.setVisible(false);
+		labelChallenges.setVisible(false);
+		
 
 	}
 }
